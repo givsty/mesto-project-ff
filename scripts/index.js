@@ -1,6 +1,5 @@
 // @todo: Темплейт карточки
 const templateCards = document.querySelector('#card-template').content;
-
 // @todo: DOM узлы
 const addPlacesBtn = document.querySelector('.profile__add-button')
 const places = document.querySelector('.places');
@@ -14,26 +13,33 @@ const popUpForm = popUpElement.querySelector('.popup__form')
 
 
 // @todo: Функция создания карточки
-function createCard (name, link, deleteCard) {
+function createCard (name, link) {
   const cardElement = templateCards.querySelector('.places__item').cloneNode(true);
   const cardName = cardElement.querySelector('.card__title')
   const cardImage = cardElement.querySelector('.card__image')
+  const deleteCardBtn = cardElement.querySelector('.card__delete-button')
+
+  deleteCardBtn.addEventListener('click', (event)=>{
+    deleteCard(event.target)
+  })
 
   cardName.textContent = name;
   cardImage.setAttribute('src', link)
   return placesList.append(cardElement)
+ 
 }
 
 addPlacesBtn.addEventListener('click', ()=>{
-  const popUpFormNameValue = popUpForm.querySelector('.popup__input_type_card-name')
-  const popUpFormLinkValue = popUpForm.querySelector('.popup__input_type_url')
   const popUpFormBtn = popUpForm.querySelector('.popup__button')
+
+  //Открытие 
   popUpElement.classList.add('popup_is-opened')
 
   //Сохранение новой карточки
-  popUpFormBtn.addEventListener('input', ()=>{
+  popUpFormBtn.addEventListener('click', ()=>{
+    const popUpFormNameValue = popUpForm.querySelector('.popup__input_type_card-name')
+    const popUpFormLinkValue = popUpForm.querySelector('.popup__input_type_url')
     createCard(popUpFormNameValue.value, popUpFormLinkValue.value)
-    console.log(popUpFormNameValue.value, popUpFormLinkValue.value)
   })
   
   //Закрытие карточки
@@ -44,8 +50,8 @@ addPlacesBtn.addEventListener('click', ()=>{
 
 // @todo: Функция удаления карточки
 
-function deleteCard () {
-
+function deleteCard (element) {
+  element.closest('.places__item').remove()
 }
 
 // @todo: Вывести карточки на страницу
