@@ -14,14 +14,14 @@ const popUpForm = popUpElement.querySelector('.popup__form')
 
 
 // @todo: Функция создания карточки
-function createCard (name, link) {
+function createCard (name, link, deleteCard) {
   const cardElement = templateCards.querySelector('.places__item').cloneNode(true);
   const cardName = cardElement.querySelector('.card__title')
   const cardImage = cardElement.querySelector('.card__image')
 
   cardName.textContent = name;
   cardImage.setAttribute('src', link)
-  placesList.append(cardElement)
+  return placesList.append(cardElement)
 }
 
 addPlacesBtn.addEventListener('click', ()=>{
