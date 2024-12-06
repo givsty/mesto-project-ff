@@ -10,7 +10,6 @@ const placesList = places.querySelector('.places__list')
 const popUpElement = document.querySelector('.popup_type_new-card')
 const popUpClose = popUpElement.querySelector('.popup__close')
 const popUpForm = popUpElement.querySelector('.popup__form')
-const popUpFormBtn = popUpForm.querySelector('.popup__button')
 
 //Функция создания карточки
 function createCard (name, link, deleteCard) {
