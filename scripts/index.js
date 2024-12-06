@@ -23,7 +23,7 @@ function createCard (name, link, deleteCard) {
   placesList.append(cardElement)
 
   deleteCardBtn.addEventListener('click', (event) => deleteCard(event.target))
-
+  
   return cardElement
 }
 
