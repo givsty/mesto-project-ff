@@ -1,7 +1,7 @@
-// @todo: Темплейт карточки
+//Темплейт карточки
 const templateCards = document.querySelector('#card-template').content;
 
-// @todo: DOM узлы
+//DOM узлы
 const addPlacesBtn = document.querySelector('.profile__add-button')
 const places = document.querySelector('.places');
 const placesList = places.querySelector('.places__list')
@@ -11,21 +11,20 @@ const popUpElement = document.querySelector('.popup_type_new-card')
 const popUpClose = popUpElement.querySelector('.popup__close')
 const popUpForm = popUpElement.querySelector('.popup__form')
 
-// @todo: Функция создания карточки
+//Функция создания карточки
 function createCard (name, link, deleteCard) {
   const cardElement = templateCards.querySelector('.places__item').cloneNode(true);
   const cardName = cardElement.querySelector('.card__title')
   const cardImage = cardElement.querySelector('.card__image')
   const deleteCardBtn = cardElement.querySelector('.card__delete-button')
 
-  deleteCardBtn.addEventListener('click', (event)=>{
-    deleteCard(event.target)
-  })
-
   cardName.textContent = name;
   cardImage.setAttribute('src', link)
-  return placesList.append(cardElement)
- 
+  placesList.append(cardElement)
+
+  deleteCardBtn.addEventListener('click', (event) => deleteCard(event.target))
+
+  return cardElement
 }
 
 addPlacesBtn.addEventListener('click', ()=>{
@@ -38,7 +37,7 @@ addPlacesBtn.addEventListener('click', ()=>{
   popUpFormBtn.addEventListener('click', ()=>{
     const popUpFormNameValue = popUpForm.querySelector('.popup__input_type_card-name')
     const popUpFormLinkValue = popUpForm.querySelector('.popup__input_type_url')
-    createCard(popUpFormNameValue.value, popUpFormLinkValue.value)
+    createCard(popUpFormNameValue.value, popUpFormLinkValue.value, deleteCard)
   })
   
   //Закрытие формы 
@@ -47,13 +46,13 @@ addPlacesBtn.addEventListener('click', ()=>{
   })
 })
 
-// @todo: Функция удаления карточки
+//Функция удаления карточки
 
 function deleteCard (element) {
   element.closest('.places__item').remove()
 }
 
-// @todo: Вывести карточки на страницу
+//Вывести карточки на страницу
 initialCards.forEach(element => {
   createCard(element.name, element.link, deleteCard)
 });
