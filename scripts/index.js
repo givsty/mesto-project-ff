@@ -10,6 +10,7 @@ const placesList = places.querySelector('.places__list')
 const popUpElement = document.querySelector('.popup_type_new-card')
 const popUpClose = popUpElement.querySelector('.popup__close')
 const popUpForm = popUpElement.querySelector('.popup__form')
+const popUpFormBtn = popUpForm.querySelector('.popup__button')
 
 //Функция создания карточки
 function createCard (name, link, deleteCard) {
@@ -18,27 +19,28 @@ function createCard (name, link, deleteCard) {
   const cardImage = cardElement.querySelector('.card__image')
   const deleteCardBtn = cardElement.querySelector('.card__delete-button')
 
+  deleteCardBtn.addEventListener('click', (event) => deleteCard(event.target))
+
   cardName.textContent = name;
   cardImage.src = link;
   cardImage.alt = name;
-  
-  deleteCardBtn.addEventListener('click', (event) => deleteCard(event.target))
   
   return cardElement
 }
 
 //События откртия окна 
 addPlacesBtn.addEventListener('click', ()=>{
-  const popUpFormBtn = popUpForm.querySelector('.popup__button')
 
   //Открытие формы 
   popUpElement.classList.add('popup_is-opened')
 
   //Сохранение новой карточки
-  popUpFormBtn.addEventListener('click', ()=>{
+  popUpForm.addEventListener('submit', (event)=>{
     const popUpFormNameValue = popUpForm.querySelector('.popup__input_type_card-name')
     const popUpFormLinkValue = popUpForm.querySelector('.popup__input_type_url')
     placesList.append(createCard(popUpFormNameValue.value, popUpFormLinkValue.value, deleteCard))
+    event.preventDefault()
+    event.target.reset()
   })
   
   //Закрытие формы 
