@@ -19,14 +19,15 @@ function createCard (name, link, deleteCard) {
   const deleteCardBtn = cardElement.querySelector('.card__delete-button')
 
   cardName.textContent = name;
-  cardImage.setAttribute('src', link)
-  placesList.append(cardElement)
-
+  cardImage.src = link;
+  cardImage.alt = name;
+  
   deleteCardBtn.addEventListener('click', (event) => deleteCard(event.target))
   
   return cardElement
 }
 
+//События откртия окна 
 addPlacesBtn.addEventListener('click', ()=>{
   const popUpFormBtn = popUpForm.querySelector('.popup__button')
 
@@ -37,7 +38,7 @@ addPlacesBtn.addEventListener('click', ()=>{
   popUpFormBtn.addEventListener('click', ()=>{
     const popUpFormNameValue = popUpForm.querySelector('.popup__input_type_card-name')
     const popUpFormLinkValue = popUpForm.querySelector('.popup__input_type_url')
-    createCard(popUpFormNameValue.value, popUpFormLinkValue.value, deleteCard)
+    placesList.append(createCard(popUpFormNameValue.value, popUpFormLinkValue.value, deleteCard))
   })
   
   //Закрытие формы 
@@ -54,5 +55,5 @@ function deleteCard (element) {
 
 //Вывести карточки на страницу
 initialCards.forEach(element => {
-  createCard(element.name, element.link, deleteCard)
+  placesList.append(createCard(element.name, element.link, deleteCard))
 });
