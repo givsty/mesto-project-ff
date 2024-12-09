@@ -1,3 +1,5 @@
+import '../pages/index.css';
+
 //Темплейт карточки
 const templateCards = document.querySelector('#card-template').content;
 
