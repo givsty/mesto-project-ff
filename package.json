@@ -15,5 +15,8 @@
     "dev": "webpack serve"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "core-js": "^3.39.0"
+  }
 }
