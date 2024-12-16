@@ -69,9 +69,8 @@ profileEditeBtn.addEventListener('click', (event) => {
     closeModal(popUpProfile)
   })
 })
-//Событие открытия окна с изображениями 
 
 //Вывести карточки на страницу
 initialCards.forEach(element => placesList.append(createCard(element.name, element.link, deleteCard, likeCard)));
 
-export {popUp};
+export {popUp, placesList};

@@ -1,4 +1,5 @@
-import { openModal, closeModal } from "./modal";
+import {placesList} from '../index'
+import { openModal, closeModal, } from "./modal";
 //Темплейт карточки
 const templateCards = document.querySelector('#card-template').content;
 
@@ -7,6 +8,7 @@ const popUpElementImg = document.querySelector('.popup_type_image')
 const popUpCloseImg = popUpElementImg.querySelector('.popup__close')
 const popUpImg = popUpElementImg.querySelector('.popup__image')
 const popUpDescriptions = popUpElementImg.querySelector('.popup__caption')
+
 //Функция создания карточки
 function createCard (name, link, deleteCard, likeCard) {
   const cardElement = templateCards.querySelector('.places__item').cloneNode(true);
@@ -16,7 +18,7 @@ function createCard (name, link, deleteCard, likeCard) {
   const likeBtn = cardElement.querySelector('.card__like-button')
 
   deleteCardBtn.addEventListener('click', (event) => deleteCard(event.target))
-  likeBtn.addEventListener('click', (event) => likeCard(event))
+  placesList.addEventListener('click', (event) => likeCard(event))
   
   cardImage.addEventListener('click', ()=> {
     popUpImg.src = link
@@ -41,7 +43,10 @@ function deleteCard (element) {
 
 //Функция лайка карточки
 function likeCard(event) {
-  console.log('кнопка лайка')
+  if(event.target.classList.contains('card__like-button')) {
+    event.target.classList.toggle('card__like-button_is-active')
+    console.log('фафыаыфафа')
+  }
 }
 
 
