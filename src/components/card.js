@@ -4,11 +4,12 @@ import { openModal, closeModal, } from "./modal";
 const templateCards = document.querySelector('#card-template').content;
 
 //Popup image
+const popUpContent = document.querySelector('.popup__content')
 const popUpElementImg = document.querySelector('.popup_type_image')
+const popUpImgInner = popUpElementImg.querySelector('.popup__content_content_image')
 const popUpCloseImg = popUpElementImg.querySelector('.popup__close')
 const popUpImg = popUpElementImg.querySelector('.popup__image')
 const popUpDescriptions = popUpElementImg.querySelector('.popup__caption')
-
 //Функция создания карточки
 function createCard (name, link, deleteCard, likeCard) {
   const cardElement = templateCards.querySelector('.places__item').cloneNode(true);
@@ -23,9 +24,19 @@ function createCard (name, link, deleteCard, likeCard) {
     popUpImg.src = link
     popUpDescriptions.textContent = name
     openModal(popUpElementImg)
-    popUpCloseImg.addEventListener('click', ()=>{
-      closeModal(popUpElementImg)
+    popUpElementImg.addEventListener('click', (event)=>{
+
+      if(event.target.closest('popup__content_content_image')) {
+        return ''
+      }else {
+        closeModal(popUpElementImg)
+      }
+
     })
+
+    // popUpCloseImg.addEventListener('click', ()=>{
+    //   closeModal(popUpElementImg)
+    // })
   })
 
   cardName.textContent = name;
@@ -34,7 +45,7 @@ function createCard (name, link, deleteCard, likeCard) {
   
   return cardElement
 }
-console.log();
+
 //Функция удаления карточки
 function deleteCard (element) {
   element.closest('.places__item').remove()
