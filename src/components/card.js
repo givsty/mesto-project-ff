@@ -15,7 +15,6 @@ function createCard (name, link, deleteCard, likeCard) {
   const cardName = cardElement.querySelector('.card__title')
   const cardImage = cardElement.querySelector('.card__image')
   const deleteCardBtn = cardElement.querySelector('.card__delete-button')
-  const likeBtn = cardElement.querySelector('.card__like-button')
 
   deleteCardBtn.addEventListener('click', (event) => deleteCard(event.target))
   placesList.addEventListener('click', (event) => likeCard(event))
@@ -35,7 +34,7 @@ function createCard (name, link, deleteCard, likeCard) {
   
   return cardElement
 }
-
+console.log();
 //Функция удаления карточки
 function deleteCard (element) {
   element.closest('.places__item').remove()
@@ -45,7 +44,6 @@ function deleteCard (element) {
 function likeCard(event) {
   if(event.target.classList.contains('card__like-button')) {
     event.target.classList.toggle('card__like-button_is-active')
-    console.log('фафыаыфафа')
   }
 }
 

@@ -42,6 +42,7 @@ function handleFormSubmit(event) {
   nameInput.textContent = nameInput.value
 }
 
+
 //События открытия окна с карточками
 addPlacesBtn.addEventListener('click', (event)=> {
   const popUpFormNameValue = popUpForm.querySelector('.popup__input_type_card-name')
@@ -63,6 +64,8 @@ addPlacesBtn.addEventListener('click', (event)=> {
 
 //Событие открытия окна с профилем
 profileEditeBtn.addEventListener('click', (event) => {
+
+  event.preventDefault()
   openModal(popUpProfile)
   popUpForm.addEventListener('submit', handleFormSubmit(event))
   popUpCloseProfile.addEventListener('click', ()=>{
