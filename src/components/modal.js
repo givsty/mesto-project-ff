@@ -1,7 +1,7 @@
 import { popUpClose } from "../index"
 //Popup сard
 function openModal(element) {
-  element.classList.add('popup_is-opened')
+  element.classList.add('popup_is-opened', 'popup_is-animated')
 }
 
 function closeModal(element) {  

@@ -17,7 +17,10 @@ const headerLogo = document.querySelector('.header__logo')
 const headerProfile = document.querySelector('.profile__image')
 
 //Popup profile
+const profileTitle = document.querySelector('.profile__title')
+const profileDescriptions = document.querySelector('.profile__description')
 const popUpProfile = document.querySelector('.popup_type_edit')
+const popUpFormProfie = popUpProfile.querySelector('.popup__form')
 const popUpCloseProfile = popUpProfile.querySelector('.popup__close')
 const jobInput = popUpProfile.querySelector('.popup__input_type_name')
 const nameInput = popUpProfile.querySelector('.popup__input_type_description')
@@ -37,8 +40,8 @@ headerProfile.style.backgroundImage = `url('${avatar}')`
 
 //Функция открытия модального окна профиля
 function handleFormSubmit(event) {
-  jobInput.textContent = jobInput.value
-  nameInput.textContent = nameInput.value
+  profileTitle.textContent = nameInput.value
+  profileDescriptions.textContent = jobInput.value
 }
 
 //События открытия окна с карточками
@@ -46,7 +49,7 @@ addPlacesBtn.addEventListener('click', (event)=> {
   const popUpFormNameValue = popUpForm.querySelector('.popup__input_type_card-name')
   const popUpFormLinkValue = popUpForm.querySelector('.popup__input_type_url')
   //Открытие формы 
-  openModal(popUpElement)           
+  openModal(popUpElement)        
   //Сохранение новой карточки
   popUpForm.addEventListener('submit', (event)=>{
     placesList.append(createCard(popUpFormNameValue.value, popUpFormLinkValue.value, deleteCard, likeCard))
@@ -55,17 +58,19 @@ addPlacesBtn.addEventListener('click', (event)=> {
   })
    
   //Закрытие формы 
-  popUpClose.addEventListener('click', ()=>{
-    closeModal(popUpElement)
+  popUpClose.addEventListener('click', (event)=>{
+    closeModal(popUpElement, event)
   })
 })
 
 //Событие открытия окна с профилем
-profileEditeBtn.addEventListener('click', (event) => {
-
-  event.preventDefault()
+profileEditeBtn.addEventListener('click', () => {
   openModal(popUpProfile)
-  popUpForm.addEventListener('submit', handleFormSubmit(event))
+  popUpFormProfie.addEventListener('submit', (event)=>{
+    handleFormSubmit(event)
+    event.preventDefault()
+    event.target.reset()
+  })
   popUpCloseProfile.addEventListener('click', ()=>{
     closeModal(popUpProfile)
   })

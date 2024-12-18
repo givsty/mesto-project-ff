@@ -26,6 +26,7 @@ function createCard (name, link, deleteCard, likeCard) {
     likeCard(event)
     : ""
   })
+
   cardImage.addEventListener('click', ()=> {
     popUpImg.src = link
     popUpDescriptions.textContent = name
