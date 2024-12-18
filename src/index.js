@@ -22,8 +22,8 @@ const profileDescriptions = document.querySelector('.profile__description')
 const popUpProfile = document.querySelector('.popup_type_edit')
 const popUpFormProfie = popUpProfile.querySelector('.popup__form')
 const popUpCloseProfile = popUpProfile.querySelector('.popup__close')
-const jobInput = popUpProfile.querySelector('.popup__input_type_name')
-const nameInput = popUpProfile.querySelector('.popup__input_type_description')
+const nameInput = popUpProfile.querySelector('.popup__input_type_name')
+const jobInput = popUpProfile.querySelector('.popup__input_type_description')
 
 //Popup Card
 const popUpElement = document.querySelector('.popup_type_new-card')
@@ -42,7 +42,14 @@ headerProfile.style.backgroundImage = `url('${avatar}')`
 function handleFormSubmit(event) {
   profileTitle.textContent = nameInput.value
   profileDescriptions.textContent = jobInput.value
+
+  nameInput.setAttribute('value', profileTitle.textContent)
+  jobInput.setAttribute('value', profileDescriptions.textContent)
 }
+
+// 
+nameInput.setAttribute('value', profileTitle.textContent)
+jobInput.setAttribute('value', profileDescriptions.textContent)
 
 //События открытия окна с карточками
 addPlacesBtn.addEventListener('click', (event)=> {
