@@ -10,7 +10,7 @@ const addPlacesBtn = document.querySelector('.profile__add-button')
 const profileEditeBtn = document.querySelector('.profile__edit-button')
 const places = document.querySelector('.places');
 const placesList = places.querySelector('.places__list')
-console.log();
+
 //Header Logo
 const headerLogo = document.querySelector('.header__logo')
 
@@ -75,4 +75,4 @@ profileEditeBtn.addEventListener('click', (event) => {
 //Вывести карточки на страницу
 initialCards.forEach(element => placesList.append(createCard(element.name, element.link, deleteCard, likeCard)));
 
-export {popUp, placesList};
+export {popUp, placesList, popUpClose};

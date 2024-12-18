@@ -25,13 +25,7 @@ function createCard (name, link, deleteCard, likeCard) {
     popUpDescriptions.textContent = name
     openModal(popUpElementImg)
     popUpElementImg.addEventListener('click', (event)=>{
-
-      if(event.target.closest('popup__content_content_image')) {
-        return ''
-      }else {
-        closeModal(popUpElementImg)
-      }
-
+      closeModal(popUpElementImg)
     })
 
     // popUpCloseImg.addEventListener('click', ()=>{
