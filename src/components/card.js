@@ -1,3 +1,4 @@
+import initialCards from '../cards';
 import {placesList} from '../index'
 import { openModal, closeModal, } from "./modal";
 //Темплейт карточки
@@ -10,16 +11,21 @@ const popUpImgInner = popUpElementImg.querySelector('.popup__content_content_ima
 const popUpCloseImg = popUpElementImg.querySelector('.popup__close')
 const popUpImg = popUpElementImg.querySelector('.popup__image')
 const popUpDescriptions = popUpElementImg.querySelector('.popup__caption')
+
 //Функция создания карточки
 function createCard (name, link, deleteCard, likeCard) {
   const cardElement = templateCards.querySelector('.places__item').cloneNode(true);
   const cardName = cardElement.querySelector('.card__title')
   const cardImage = cardElement.querySelector('.card__image')
   const deleteCardBtn = cardElement.querySelector('.card__delete-button')
+  const cardElementCheked = document.querySelectorAll('.places__item')
 
   deleteCardBtn.addEventListener('click', (event) => deleteCard(event.target))
-  placesList.addEventListener('click', (event) => likeCard(event))
-  
+  placesList.addEventListener('click', (event) => {
+    cardElementCheked.length === initialCards.length - 1 ?
+    likeCard(event)
+    : ""
+  })
   cardImage.addEventListener('click', ()=> {
     popUpImg.src = link
     popUpDescriptions.textContent = name
@@ -51,6 +57,5 @@ function likeCard(event) {
     event.target.classList.toggle('card__like-button_is-active')
   }
 }
-
 
 export {createCard, deleteCard, likeCard};

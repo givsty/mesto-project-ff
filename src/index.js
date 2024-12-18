@@ -10,7 +10,6 @@ const addPlacesBtn = document.querySelector('.profile__add-button')
 const profileEditeBtn = document.querySelector('.profile__edit-button')
 const places = document.querySelector('.places');
 const placesList = places.querySelector('.places__list')
-
 //Header Logo
 const headerLogo = document.querySelector('.header__logo')
 
