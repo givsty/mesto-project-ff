@@ -1,14 +1,11 @@
 import initialCards from '../cards';
 import {placesList} from '../index'
-import { openModal, closeModal, } from "./modal";
+import { openModal, closeModal} from "./modal";
 //Темплейт карточки
 const templateCards = document.querySelector('#card-template').content;
 
 //Popup image
-const popUpContent = document.querySelector('.popup__content')
 const popUpElementImg = document.querySelector('.popup_type_image')
-const popUpImgInner = popUpElementImg.querySelector('.popup__content_content_image')
-const popUpCloseImg = popUpElementImg.querySelector('.popup__close')
 const popUpImg = popUpElementImg.querySelector('.popup__image')
 const popUpDescriptions = popUpElementImg.querySelector('.popup__caption')
 
@@ -21,30 +18,26 @@ function createCard (name, link, deleteCard, likeCard) {
   const cardElementCheked = document.querySelectorAll('.places__item')
 
   deleteCardBtn.addEventListener('click', (event) => deleteCard(event.target))
-  placesList.addEventListener('click', (event) => {
-    cardElementCheked.length === initialCards.length - 1 ?
-    likeCard(event)
-    : ""
-  })
 
-  cardImage.addEventListener('click', ()=> {
+  placesList.addEventListener('click', (event) => {
+    cardElementCheked.length === initialCards.length - 1 ? likeCard(event) : '';
+  });
+
+  //Открытие модального окна у изображения, находящегося в карточке
+  cardImage.addEventListener('click', (event)=> {
     popUpImg.src = link
     popUpDescriptions.textContent = name
     openModal(popUpElementImg)
     popUpElementImg.addEventListener('click', (event)=>{
-      closeModal(popUpElementImg)
+      closeModal(popUpElementImg, event)
     })
-
-    // popUpCloseImg.addEventListener('click', ()=>{
-    //   closeModal(popUpElementImg)
-    // })
   })
 
   cardName.textContent = name;
   cardImage.src = link;
   cardImage.alt = name;
   
-  return cardElement
+  return cardElement;
 }
 
 //Функция удаления карточки

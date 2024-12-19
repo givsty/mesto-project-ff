@@ -10,10 +10,11 @@ const addPlacesBtn = document.querySelector('.profile__add-button')
 const profileEditeBtn = document.querySelector('.profile__edit-button')
 const places = document.querySelector('.places');
 const placesList = places.querySelector('.places__list')
-//Header Logo
+
+//Header 
 const headerLogo = document.querySelector('.header__logo')
 
-//Header profile
+//Section profile
 const headerProfile = document.querySelector('.profile__image')
 
 //Popup profile
@@ -37,9 +38,10 @@ const popUpForm = popUpElement.querySelector('.popup__form')
 //Добавление картинок
 headerLogo.src = headerLogoImg
 headerProfile.style.backgroundImage = `url('${avatar}')`
-
 //Функция открытия модального окна профиля
 function handleFormSubmit(event) {
+  event.preventDefault()
+
   profileTitle.textContent = nameInput.value
   profileDescriptions.textContent = jobInput.value
 
@@ -47,7 +49,7 @@ function handleFormSubmit(event) {
   jobInput.setAttribute('value', profileDescriptions.textContent)
 }
 
-// 
+
 nameInput.setAttribute('value', profileTitle.textContent)
 jobInput.setAttribute('value', profileDescriptions.textContent)
 
@@ -59,7 +61,7 @@ addPlacesBtn.addEventListener('click', (event)=> {
   openModal(popUpElement)        
   //Сохранение новой карточки
   popUpForm.addEventListener('submit', (event)=>{
-    placesList.append(createCard(popUpFormNameValue.value, popUpFormLinkValue.value, deleteCard, likeCard))
+    placesList.prepend(createCard(popUpFormNameValue.value, popUpFormLinkValue.value, deleteCard, likeCard))
     event.preventDefault()
     event.target.reset()
   })
@@ -75,13 +77,12 @@ profileEditeBtn.addEventListener('click', () => {
   openModal(popUpProfile)
   popUpFormProfie.addEventListener('submit', (event)=>{
     handleFormSubmit(event)
-    event.preventDefault()
-    event.target.reset()
   })
-  popUpCloseProfile.addEventListener('click', ()=>{
-    closeModal(popUpProfile)
+  popUpCloseProfile.addEventListener('click', (event)=>{
+    closeModal(popUpProfile, event)
   })
 })
+
 
 //Вывести карточки на страницу
 initialCards.forEach(element => placesList.append(createCard(element.name, element.link, deleteCard, likeCard)));

@@ -1,11 +1,15 @@
-import { popUpClose } from "../index"
 //Popup сard
 function openModal(element) {
-  element.classList.add('popup_is-opened', 'popup_is-animated')
+  element.classList.add('popup_is-animated')
+  setTimeout(()=>{
+    element.classList.add('popup_is-opened')
+  })
 }
 
-function closeModal(element) {  
-  element.classList.remove('popup_is-opened')
+function closeModal(element, event) {
+  if(event.target.closest('.popup__close') || event.key === 'Esc') {
+    element.classList.remove('popup_is-opened')   
+  }
 }
 
 export { openModal, closeModal}
