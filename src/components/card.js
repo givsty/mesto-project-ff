@@ -31,8 +31,14 @@ function createCard (name, link, deleteCard, likeCard) {
     popUpElementImg.addEventListener('click', (event)=>{
       closeModal(popUpElementImg, event)
     })
+    popUpElementImg.addEventListener('keydown', (event)=>{
+      console.log(event.key)
+      closeModal(popUpElementImg, event)
+    })
   })
-
+  cardImage.addEventListener('keydown', (event)=>{
+    console.log(event.key)
+  })
   cardName.textContent = name;
   cardImage.src = link;
   cardImage.alt = name;

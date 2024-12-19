@@ -1,5 +1,6 @@
 import {createCard, deleteCard, likeCard} from './components/card'
 import {openModal, closeModal} from './components/modal'
+import {keyHandler} from './components/modal'
 import '../pages/index.css';
 import initialCards from './cards';
 import headerLogoImg from '../images/logo.svg'
@@ -77,6 +78,13 @@ profileEditeBtn.addEventListener('click', () => {
   openModal(popUpProfile)
   popUpFormProfie.addEventListener('submit', (event)=>{
     handleFormSubmit(event)
+  })
+  jobInput.addEventListener('keydown', (event)=>{
+    
+    //ПЕРЕДЕЛАТЬ
+    if(event.key === 'Escape') {
+      popUpProfile.classList.remove('popup_is-opened')  
+    }
   })
   popUpCloseProfile.addEventListener('click', (event)=>{
     closeModal(popUpProfile, event)

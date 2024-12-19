@@ -7,7 +7,7 @@ function openModal(element) {
 }
 
 function closeModal(element, event) {
-  if(event.target.closest('.popup__close') || event.key === 'Esc') {
+  if(event.target.closest('.popup__close')) {
     element.classList.remove('popup_is-opened')   
   }
 }
