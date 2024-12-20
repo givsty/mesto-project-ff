@@ -1,6 +1,8 @@
 import initialCards from '../cards';
 import {placesList} from '../index'
 import { openModal, closeModal} from "./modal";
+import { keyHandler } from './modal';
+
 //Темплейт карточки
 const templateCards = document.querySelector('#card-template').content;
 
@@ -27,25 +29,30 @@ function createCard (name, link, deleteCard, likeCard) {
   cardImage.addEventListener('click', (event)=> {
     popUpImg.src = link
     popUpDescriptions.textContent = name
+
     openModal(popUpElementImg)
+
     popUpElementImg.addEventListener('click', (event)=>{
+      event.stopPropagation()
       closeModal(popUpElementImg, event)
     })
+
     popUpElementImg.addEventListener('keydown', (event)=>{
       console.log(event.key)
       closeModal(popUpElementImg, event)
     })
+
+    window.addEventListener('keydown', (event)=>{
+      keyHandler(event, popUpElementImg)
+    })
   })
-  cardImage.addEventListener('keydown', (event)=>{
-    console.log(event.key)
-  })
+  
   cardName.textContent = name;
   cardImage.src = link;
   cardImage.alt = name;
   
   return cardElement;
 }
-
 //Функция удаления карточки
 function deleteCard (element) {
   element.closest('.places__item').remove()

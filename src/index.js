@@ -71,14 +71,20 @@ addPlacesBtn.addEventListener('click', (event)=> {
   popUpClose.addEventListener('click', (event)=>{
     closeModal(popUpElement, event)
   })
+
+  window.addEventListener('keydown', (event)=>{
+    keyHandler(event, popUpElement)
+  })
 })
 
 //Событие открытия окна с профилем
 profileEditeBtn.addEventListener('click', () => {
   openModal(popUpProfile)
+  
   popUpFormProfie.addEventListener('submit', (event)=>{
     handleFormSubmit(event)
   })
+
   jobInput.addEventListener('keydown', (event)=>{
     
     //ПЕРЕДЕЛАТЬ
@@ -86,8 +92,13 @@ profileEditeBtn.addEventListener('click', () => {
       popUpProfile.classList.remove('popup_is-opened')  
     }
   })
+
   popUpCloseProfile.addEventListener('click', (event)=>{
     closeModal(popUpProfile, event)
+  })
+
+  window.addEventListener('keydown', (event)=>{
+    keyHandler(event, popUpProfile)
   })
 })
 

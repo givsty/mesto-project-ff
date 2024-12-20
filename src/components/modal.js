@@ -7,9 +7,12 @@ function openModal(element) {
 }
 
 function closeModal(element, event) {
-  if(event.target.closest('.popup__close')) {
-    element.classList.remove('popup_is-opened')   
-  }
+  element.classList.remove('popup_is-opened')   
 }
 
-export { openModal, closeModal}
+function keyHandler(event, element) {
+  if(event.key === 'Escape') {
+    closeModal(element, event)
+  } 
+}
+export { openModal, closeModal, keyHandler}
