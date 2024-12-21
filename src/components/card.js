@@ -1,6 +1,6 @@
 import initialCards from '../cards';
 import {placesList} from '../index'
-import { openModal, closeModal} from "./modal";
+import { openModal, closeModal, closeModalOnBg} from "./modal";
 import { keyHandler } from './modal';
 
 //Темплейт карточки
@@ -10,6 +10,7 @@ const templateCards = document.querySelector('#card-template').content;
 const popUpElementImg = document.querySelector('.popup_type_image')
 const popUpImg = popUpElementImg.querySelector('.popup__image')
 const popUpDescriptions = popUpElementImg.querySelector('.popup__caption')
+const popUpCloseImg = popUpElementImg.querySelector('.popup__close')
 
 //Функция создания карточки
 function createCard (name, link, deleteCard, likeCard) {
@@ -32,19 +33,16 @@ function createCard (name, link, deleteCard, likeCard) {
 
     openModal(popUpElementImg)
 
-    popUpElementImg.addEventListener('click', (event)=>{
+    popUpCloseImg.addEventListener('click', (event)=>{
       event.stopPropagation()
-      closeModal(popUpElementImg, event)
-    })
-
-    popUpElementImg.addEventListener('keydown', (event)=>{
-      console.log(event.key)
       closeModal(popUpElementImg, event)
     })
 
     window.addEventListener('keydown', (event)=>{
       keyHandler(event, popUpElementImg)
     })
+    
+    closeModalOnBg(popUpElementImg)
   })
   
   cardName.textContent = name;

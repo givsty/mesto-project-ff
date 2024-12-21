@@ -1,5 +1,5 @@
 import {createCard, deleteCard, likeCard} from './components/card'
-import {openModal, closeModal} from './components/modal'
+import {openModal, closeModal, closeModalOnBg} from './components/modal'
 import {keyHandler} from './components/modal'
 import '../pages/index.css';
 import initialCards from './cards';
@@ -76,12 +76,13 @@ addPlacesBtn.addEventListener('click', (event)=> {
   window.addEventListener('keydown', (event)=>{
     keyHandler(event, popUpElement)
   })
+  closeModalOnBg(popUpElement)
 })
 
 //Событие открытия окна с профилем
 profileEditeBtn.addEventListener('click', () => {
   openModal(popUpProfile)
-  
+
   popUpFormProfie.addEventListener('submit', (event)=>{
     handleFormSubmit(event)
   })
@@ -94,8 +95,8 @@ profileEditeBtn.addEventListener('click', () => {
     keyHandler(event, popUpProfile)
   })
 
+  closeModalOnBg(popUpProfile)
 })
-
 
 //Вывести карточки на страницу
 initialCards.forEach(element => placesList.append(createCard(element.name, element.link, deleteCard, likeCard)));

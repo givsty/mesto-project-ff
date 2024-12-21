@@ -1,5 +1,5 @@
 //Popup сard 
-import { handleFormSubmit } from "../index"
+import { handleFormSubmit, popUp } from "../index"
 
 function openModal(element) {
   element.classList.add('popup_is-animated')
@@ -9,7 +9,16 @@ function openModal(element) {
 }
 
 function closeModal(element, event) {
-  element.classList.remove('popup_is-opened')   
+  element.classList.remove('popup_is-opened')
+}
+
+function closeModalOnBg(element) {
+  window.addEventListener('click', (event) => {
+    if (event.target === popUp) {
+      closeModal(element, event);
+      console.log('функция сработала!!');
+    }
+  });
 }
 
 function keyHandler(event, element) {
@@ -23,4 +32,4 @@ function keyHandler(event, element) {
   }
 }
 
-export { openModal, closeModal, keyHandler}
+export { openModal, closeModal, keyHandler, closeModalOnBg}
