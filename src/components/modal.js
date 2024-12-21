@@ -1,4 +1,6 @@
-//Popup сard
+//Popup сard 
+import { handleFormSubmit } from "../index"
+
 function openModal(element) {
   element.classList.add('popup_is-animated')
   setTimeout(()=>{
@@ -13,6 +15,12 @@ function closeModal(element, event) {
 function keyHandler(event, element) {
   if(event.key === 'Escape') {
     closeModal(element, event)
-  } 
+  }
+
+  if(event.key === 'Enter') {
+    console.log('нажал на enter');
+    handleFormSubmit(event)
+  }
 }
+
 export { openModal, closeModal, keyHandler}

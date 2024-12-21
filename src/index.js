@@ -39,6 +39,7 @@ const popUpForm = popUpElement.querySelector('.popup__form')
 //Добавление картинок
 headerLogo.src = headerLogoImg
 headerProfile.style.backgroundImage = `url('${avatar}')`
+
 //Функция открытия модального окна профиля
 function handleFormSubmit(event) {
   event.preventDefault()
@@ -85,14 +86,6 @@ profileEditeBtn.addEventListener('click', () => {
     handleFormSubmit(event)
   })
 
-  jobInput.addEventListener('keydown', (event)=>{
-    
-    //ПЕРЕДЕЛАТЬ
-    if(event.key === 'Escape') {
-      popUpProfile.classList.remove('popup_is-opened')  
-    }
-  })
-
   popUpCloseProfile.addEventListener('click', (event)=>{
     closeModal(popUpProfile, event)
   })
@@ -100,10 +93,11 @@ profileEditeBtn.addEventListener('click', () => {
   window.addEventListener('keydown', (event)=>{
     keyHandler(event, popUpProfile)
   })
+
 })
 
 
 //Вывести карточки на страницу
 initialCards.forEach(element => placesList.append(createCard(element.name, element.link, deleteCard, likeCard)));
 
-export {popUp, placesList, popUpClose};
+export {popUp, placesList, popUpClose, handleFormSubmit};
