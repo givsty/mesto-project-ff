@@ -1,5 +1,5 @@
 //Popup сard 
-import { handleFormSubmit, popUp } from "../index"
+import { handleFormSubmit} from "../index"
 
 function openModal(element) {
   element.classList.add('popup_is-animated')
@@ -16,7 +16,6 @@ function closeModalOnBg(element) {
   window.addEventListener('click', (event) => {
     if (event.target === element) {
       closeModal(element, event);
-      console.log('функция сработала!!');
     }
   });
 }

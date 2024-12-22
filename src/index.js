@@ -65,8 +65,8 @@ addPlacesBtn.addEventListener('click', (event)=> {
     placesList.prepend(createCard(popUpFormNameValue.value, popUpFormLinkValue.value, deleteCard, likeCard))
     event.preventDefault()
     event.target.reset()
-  })
-   
+  }) 
+  
   //Закрытие формы 
   popUpClose.addEventListener('click', (event)=>{
     closeModal(popUpElement, event)

@@ -27,7 +27,7 @@ function createCard (name, link, deleteCard, likeCard) {
   });
 
   //Открытие модального окна у изображения, находящегося в карточке
-  cardImage.addEventListener('click', (event)=> {
+  cardImage.addEventListener('click', ()=> {
     popUpImg.src = link
     popUpDescriptions.textContent = name
 
@@ -41,7 +41,7 @@ function createCard (name, link, deleteCard, likeCard) {
     window.addEventListener('keydown', (event)=>{
       keyHandler(event, popUpElementImg)
     })
-
+    
     closeModalOnBg(popUpElementImg)
   })
   
