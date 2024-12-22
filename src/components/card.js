@@ -41,7 +41,7 @@ function createCard (name, link, deleteCard, likeCard) {
     window.addEventListener('keydown', (event)=>{
       keyHandler(event, popUpElementImg)
     })
-    
+
     closeModalOnBg(popUpElementImg)
   })
   

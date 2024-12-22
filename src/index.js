@@ -51,7 +51,6 @@ function handleFormSubmit(event) {
   jobInput.setAttribute('value', profileDescriptions.textContent)
 }
 
-
 nameInput.setAttribute('value', profileTitle.textContent)
 jobInput.setAttribute('value', profileDescriptions.textContent)
 
@@ -60,7 +59,7 @@ addPlacesBtn.addEventListener('click', (event)=> {
   const popUpFormNameValue = popUpForm.querySelector('.popup__input_type_card-name')
   const popUpFormLinkValue = popUpForm.querySelector('.popup__input_type_url')
   //Открытие формы 
-  openModal(popUpElement)        
+  openModal(popUpElement)
   //Сохранение новой карточки
   popUpForm.addEventListener('submit', (event)=>{
     placesList.prepend(createCard(popUpFormNameValue.value, popUpFormLinkValue.value, deleteCard, likeCard))
@@ -76,6 +75,7 @@ addPlacesBtn.addEventListener('click', (event)=> {
   window.addEventListener('keydown', (event)=>{
     keyHandler(event, popUpElement)
   })
+  
   closeModalOnBg(popUpElement)
 })
 

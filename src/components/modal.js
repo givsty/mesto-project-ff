@@ -14,7 +14,7 @@ function closeModal(element, event) {
 
 function closeModalOnBg(element) {
   window.addEventListener('click', (event) => {
-    if (event.target === popUp) {
+    if (event.target === element) {
       closeModal(element, event);
       console.log('функция сработала!!');
     }
@@ -27,7 +27,6 @@ function keyHandler(event, element) {
   }
 
   if(event.key === 'Enter') {
-    console.log('нажал на enter');
     handleFormSubmit(event)
   }
 }
