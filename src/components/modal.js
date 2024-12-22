@@ -18,6 +18,7 @@ function closeModalOnBg(element) {
       closeModal(element, event);
     }
   });
+  console.log('asfafafafaffafaa')
 }
 
 function keyHandler(event, element) {

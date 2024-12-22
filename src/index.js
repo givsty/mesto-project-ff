@@ -94,8 +94,13 @@ profileEditeBtn.addEventListener('click', () => {
   window.addEventListener('keydown', (event)=>{
     keyHandler(event, popUpProfile)
   })
-
-  closeModalOnBg(popUpProfile)
+  
+  ///Исправить баг с модалкой
+  window.addEventListener('click', (event)=>{
+    if (event.target === popUp) {
+      closeModal(popUpProfile, event);
+    }
+  })
 })
 
 //Вывести карточки на страницу
