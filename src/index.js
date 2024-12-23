@@ -114,4 +114,4 @@ initialCards.forEach((element) =>
   ),
 );
 
-export { popUp, placesList, popUpClose, handleFormSubmit, popUpProfile };
+export { placesList, popUpClose, handleFormSubmit, popUpProfile };
