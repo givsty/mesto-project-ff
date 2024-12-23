@@ -15,4 +15,4 @@
 
 ## Ссылка на проект
 
-https://github.com/givsty/slozhno-sosredotochitsya.git
+https://github.com/givsty/mesto-project-ff.git
