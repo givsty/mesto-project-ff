@@ -1,5 +1,5 @@
 //Popup сard 
-import { handleFormSubmit} from "../index"
+import { handleFormSubmit, popUpProfile} from "../index"
 
 function openModal(element) {
   element.classList.add('popup_is-animated')
@@ -18,7 +18,6 @@ function closeModalOnBg(element) {
       closeModal(element, event);
     }
   });
-  console.log('asfafafafaffafaa')
 }
 
 function keyHandler(event, element) {
@@ -26,7 +25,7 @@ function keyHandler(event, element) {
     closeModal(element, event)
   }
 
-  if(event.key === 'Enter') {
+  if(event.key === 'Enter' && element == popUpProfile) {
     handleFormSubmit(event)
     closeModal(element)
   }
