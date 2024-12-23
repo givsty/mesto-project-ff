@@ -29,10 +29,6 @@ const jobInput = popUpProfile.querySelector('.popup__input_type_description');
 
 //Popup Card
 const popUpElement = document.querySelector('.popup_type_new-card');
-
-//Popup common
-const popUp = document.querySelector('.popup');
-const popUpContent = popUp.querySelector('.popup__content');
 const popUpClose = popUpElement.querySelector('.popup__close');
 const popUpForm = popUpElement.querySelector('.popup__form');
 
