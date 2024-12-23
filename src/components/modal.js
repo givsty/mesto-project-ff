@@ -28,6 +28,7 @@ function keyHandler(event, element) {
 
   if(event.key === 'Enter') {
     handleFormSubmit(event)
+    closeModal(element)
   }
 }
 

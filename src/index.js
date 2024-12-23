@@ -95,12 +95,7 @@ profileEditeBtn.addEventListener('click', () => {
     keyHandler(event, popUpProfile)
   })
   
-  ///Исправить баг с модалкой
-  window.addEventListener('click', (event)=>{
-    if (event.target === popUp) {
-      closeModal(popUpProfile, event);
-    }
-  })
+  closeModalOnBg(popUpProfile)
 })
 
 //Вывести карточки на страницу
