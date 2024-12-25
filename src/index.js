@@ -29,9 +29,13 @@ const jobInput = popUpProfile.querySelector('.popup__input_type_description');
 
 //Popup Card
 const popUpElement = document.querySelector('.popup_type_new-card');
+const popUpContent = popUpElement.querySelector('.popup__content')
 const popUpClose = popUpElement.querySelector('.popup__close');
 const popUpForm = popUpElement.querySelector('.popup__form');
-
+const popUpFormNameValue = popUpForm.querySelector(
+  '.popup__input_type_card-name',
+);
+const popUpFormLinkValue = popUpForm.querySelector('.popup__input_type_url');
 //Добавление картинок
 headerLogo.src = headerLogoImg;
 headerProfile.style.backgroundImage = `url('${avatar}')`;
@@ -50,39 +54,45 @@ function handleFormSubmit(event) {
 nameInput.setAttribute('value', profileTitle.textContent);
 jobInput.setAttribute('value', profileDescriptions.textContent);
 
-//События открытия окна с карточками
+//События открытия окна с созданием карточками
 addPlacesBtn.addEventListener('click', (event) => {
-  const popUpFormNameValue = popUpForm.querySelector(
-    '.popup__input_type_card-name',
-  );
-  const popUpFormLinkValue = popUpForm.querySelector('.popup__input_type_url');
   //Открытие формы
   openModal(popUpElement);
   //Сохранение новой карточки
-  popUpForm.addEventListener('submit', (event) => {
-    placesList.prepend(
-      createCard(
-        popUpFormNameValue.value,
-        popUpFormLinkValue.value,
-        deleteCard,
-        likeCard,
-      ),
-    );
-    event.preventDefault();
-    event.target.reset();
-  });
 
   //Закрытие формы
   popUpClose.addEventListener('click', (event) => {
     closeModal(popUpElement, event);
   });
 
-  window.addEventListener('keydown', (event) => {
-    keyHandler(event, popUpElement);
-  });
-
-  closeModalOnBg(popUpElement);
+  // window.addEventListener('keydown', (event) => {
+  //   keyHandler(event, popUpElement);
+  // });
+  popUpElement.addEventListener('click', (event)=>{
+    console.log(event.target);
+    if(event.target == popUpElement){
+      closeModal(popUpElement, event)
+    }
+  })
+  // closeModalOnBg(popUpElement);
 });
+
+popUpForm.addEventListener('submit', (event) => {
+  placesList.prepend(
+    createCard(
+      popUpFormNameValue.value,
+      popUpFormLinkValue.value,
+      deleteCard,
+      likeCard,
+    ),
+  );
+  event.preventDefault();
+  event.target.reset();
+});
+
+popUpContent.addEventListener('mousedown', (event)=>{
+  event.stopPropagation()
+})
 
 //Событие открытия окна с профилем
 profileEditeBtn.addEventListener('click', () => {
