@@ -1,10 +1,10 @@
 import { createCard, deleteCard, likeCard } from "./components/card";
 import { openModal, closeModal, closeModalOnBg } from "./components/modal";
 import { keyHandler } from "./components/modal";
-import "../pages/index.css";
+import "./pages/index.css";
 import initialCards from "./cards";
-import headerLogoImg from "../images/logo.svg";
-import avatar from "../images/avatar.jpg";
+import headerLogoImg from "./images/logo.svg";
+import avatar from "./images/avatar.jpg";
 
 //DOM узлы
 const addPlacesBtn = document.querySelector(".profile__add-button");
