@@ -1,47 +1,43 @@
-import initialCards from '../cards';
-import { placesList } from '../index';
-import { openModal, closeModal, closeModalOnBg } from './modal';
-import { keyHandler } from './modal';
+import initialCards from "../cards";
+import { placesList } from "../index";
+import { openModal, closeModal, closeModalOnBg } from "./modal";
+import { keyHandler } from "./modal";
 
 //Темплейт карточки
-const templateCards = document.querySelector('#card-template').content;
+const templateCards = document.querySelector("#card-template").content;
 
 //Popup image
-const popUpElementImg = document.querySelector('.popup_type_image');
-const popUpImg = popUpElementImg.querySelector('.popup__image');
-const popUpDescriptions = popUpElementImg.querySelector('.popup__caption');
-const popUpCloseImg = popUpElementImg.querySelector('.popup__close');
+const popUpElementImg = document.querySelector(".popup_type_image");
+const popUpImg = popUpElementImg.querySelector(".popup__image");
+const popUpDescriptions = popUpElementImg.querySelector(".popup__caption");
+const popUpCloseImg = popUpElementImg.querySelector(".popup__close");
 
 //Функция создания карточки
 function createCard(name, link, deleteCard, likeCard) {
   const cardElement = templateCards
-    .querySelector('.places__item')
+    .querySelector(".places__item")
     .cloneNode(true);
-  const cardName = cardElement.querySelector('.card__title');
-  const cardImage = cardElement.querySelector('.card__image');
-  const deleteCardBtn = cardElement.querySelector('.card__delete-button');
-  const cardElementCheked = document.querySelectorAll('.places__item');
+  const cardName = cardElement.querySelector(".card__title");
+  const cardImage = cardElement.querySelector(".card__image");
+  const deleteCardBtn = cardElement.querySelector(".card__delete-button");
+  const cardElementCheked = document.querySelectorAll(".places__item");
 
-  deleteCardBtn.addEventListener('click', (event) => deleteCard(event.target));
+  deleteCardBtn.addEventListener("click", (event) => deleteCard(event.target));
 
-  placesList.addEventListener('click', (event) => {
-    cardElementCheked.length === initialCards.length - 1 ? likeCard(event) : '';
+  placesList.addEventListener("click", (event) => {
+    cardElementCheked.length === initialCards.length - 1 ? likeCard(event) : "";
   });
 
   //Открытие модального окна у изображения, находящегося в карточке
-  cardImage.addEventListener('click', () => {
+  cardImage.addEventListener("click", () => {
     popUpImg.src = link;
     popUpDescriptions.textContent = name;
 
     openModal(popUpElementImg);
 
-    popUpCloseImg.addEventListener('click', (event) => {
+    popUpCloseImg.addEventListener("click", (event) => {
       event.stopPropagation();
       closeModal(popUpElementImg, event);
-    });
-
-    window.addEventListener('keydown', (event) => {
-      keyHandler(event, popUpElementImg);
     });
 
     closeModalOnBg(popUpElementImg);
@@ -55,13 +51,13 @@ function createCard(name, link, deleteCard, likeCard) {
 }
 //Функция удаления карточки
 function deleteCard(element) {
-  element.closest('.places__item').remove();
+  element.closest(".places__item").remove();
 }
 
 //Функция лайка карточки
 function likeCard(event) {
-  if (event.target.classList.contains('card__like-button')) {
-    event.target.classList.toggle('card__like-button_is-active');
+  if (event.target.classList.contains("card__like-button")) {
+    event.target.classList.toggle("card__like-button_is-active");
   }
 }
 
