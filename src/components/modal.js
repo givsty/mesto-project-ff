@@ -14,13 +14,6 @@ function closeModal(element, event) {
   }
 }
 
-function closeModalOnBg(element) {
-  window.addEventListener('click', (event) => {
-    if (event.target === element) {
-      closeModal(element, event);
-    }
-  });
-}
 
 function keyHandler(event, element) {
   if (event.key === 'Escape') {
@@ -33,4 +26,4 @@ function keyHandler(event, element) {
   }
 }
 
-export { openModal, closeModal, keyHandler, closeModalOnBg };
+export { openModal, closeModal, keyHandler };

@@ -1,5 +1,5 @@
 import { createCard, deleteCard, likeCard } from "./components/card";
-import { openModal, closeModal, closeModalOnBg } from "./components/modal";
+import { openModal, closeModal } from "./components/modal";
 import { keyHandler } from "./components/modal";
 import "./pages/index.css";
 import initialCards from "./cards";
@@ -36,12 +36,14 @@ const popUpForm = popUpElement.querySelector(".popup__form");
 const popUpFormNameValue = popUpForm.querySelector(".popup__input_type_card-name");
 
 const popUpFormLinkValue = popUpForm.querySelector(".popup__input_type_url");
+
 //Добавление картинок
 headerLogo.src = headerLogoImg;
 headerProfile.style.backgroundImage = `url('${avatar}')`;
 
 //Функция открытия модального окна профиля
 function handleFormSubmit(event) {
+  event.preventDefault()
   profileTitle.textContent = nameInput.value;
   profileDescriptions.textContent = jobInput.value;
 
