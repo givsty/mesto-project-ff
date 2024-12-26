@@ -22,6 +22,7 @@ const headerProfile = document.querySelector('.profile__image');
 const profileTitle = document.querySelector('.profile__title');
 const profileDescriptions = document.querySelector('.profile__description');
 const popUpProfile = document.querySelector('.popup_type_edit');
+const popUpContentProfile = document.querySelector('.popup__content')
 const popUpFormProfie = popUpProfile.querySelector('.popup__form');
 const popUpCloseProfile = popUpProfile.querySelector('.popup__close');
 const nameInput = popUpProfile.querySelector('.popup__input_type_name');
@@ -42,7 +43,6 @@ headerProfile.style.backgroundImage = `url('${avatar}')`;
 
 //Функция открытия модального окна профиля
 function handleFormSubmit(event) {
-  event.preventDefault();
 
   profileTitle.textContent = nameInput.value;
   profileDescriptions.textContent = jobInput.value;
@@ -58,25 +58,23 @@ jobInput.setAttribute('value', profileDescriptions.textContent);
 addPlacesBtn.addEventListener('click', (event) => {
   //Открытие формы
   openModal(popUpElement);
-  //Сохранение новой карточки
+
 
   //Закрытие формы
   popUpClose.addEventListener('click', (event) => {
     closeModal(popUpElement, event);
   });
-
-  // window.addEventListener('keydown', (event) => {
-  //   keyHandler(event, popUpElement);
-  // });
-  popUpElement.addEventListener('click', (event)=>{
-    console.log(event.target);
-    if(event.target == popUpElement){
-      closeModal(popUpElement, event)
-    }
+  
+  popUpElement.addEventListener('mousedown', (event)=>{
+    closeModal(popUpElement, event)
   })
-  // closeModalOnBg(popUpElement);
+
+  popUpContent.addEventListener('mousedown', (event)=>{
+    event.stopPropagation()
+  })  
 });
 
+//Сохранение новой карточки
 popUpForm.addEventListener('submit', (event) => {
   placesList.prepend(
     createCard(
@@ -90,9 +88,6 @@ popUpForm.addEventListener('submit', (event) => {
   event.target.reset();
 });
 
-popUpContent.addEventListener('mousedown', (event)=>{
-  event.stopPropagation()
-})
 
 //Событие открытия окна с профилем
 profileEditeBtn.addEventListener('click', () => {
@@ -106,11 +101,13 @@ profileEditeBtn.addEventListener('click', () => {
     closeModal(popUpProfile, event);
   });
 
-  window.addEventListener('keydown', (event) => {
-    keyHandler(event, popUpProfile);
-  });
+  popUpProfile.addEventListener('mousedown', (event) => {
+    closeModal(popUpProfile, event)
+  })
 
-  closeModalOnBg(popUpProfile);
+  popUpContentProfile.addEventListener('mousedown', (event)=>{
+    event.stopPropagation()
+  })
 });
 
 //Вывести карточки на страницу
