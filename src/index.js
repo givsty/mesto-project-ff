@@ -1,120 +1,108 @@
-import { createCard, deleteCard, likeCard } from './components/card';
-import { openModal, closeModal, closeModalOnBg } from './components/modal';
-import { keyHandler } from './components/modal';
-import '../pages/index.css';
-import initialCards from './cards';
-import headerLogoImg from '../images/logo.svg';
-import avatar from '../images/avatar.jpg';
+import { createCard, deleteCard, likeCard } from "./components/card";
+import { openModal, closeModal, closeModalOnBg } from "./components/modal";
+import { keyHandler } from "./components/modal";
+import "../pages/index.css";
+import initialCards from "./cards";
+import headerLogoImg from "../images/logo.svg";
+import avatar from "../images/avatar.jpg";
 
 //DOM узлы
-const addPlacesBtn = document.querySelector('.profile__add-button');
-const profileEditeBtn = document.querySelector('.profile__edit-button');
-const places = document.querySelector('.places');
-const placesList = places.querySelector('.places__list');
+const addPlacesBtn = document.querySelector(".profile__add-button");
+const profileEditeBtn = document.querySelector(".profile__edit-button");
+const places = document.querySelector(".places");
+const placesList = places.querySelector(".places__list");
 
 //Header
-const headerLogo = document.querySelector('.header__logo');
+const headerLogo = document.querySelector(".header__logo");
 
 //Section profile
-const headerProfile = document.querySelector('.profile__image');
+const headerProfile = document.querySelector(".profile__image");
 
 //Popup profile
-const profileTitle = document.querySelector('.profile__title');
-const profileDescriptions = document.querySelector('.profile__description');
-const popUpProfile = document.querySelector('.popup_type_edit');
-const popUpContentProfile = document.querySelector('.popup__content')
-const popUpFormProfie = popUpProfile.querySelector('.popup__form');
-const popUpCloseProfile = popUpProfile.querySelector('.popup__close');
-const nameInput = popUpProfile.querySelector('.popup__input_type_name');
-const jobInput = popUpProfile.querySelector('.popup__input_type_description');
+const profileTitle = document.querySelector(".profile__title");
+const profileDescriptions = document.querySelector(".profile__description");
+const popUpProfile = document.querySelector(".popup_type_edit");
+const popUpContentProfile = document.querySelector(".popup__content");
+const popUpFormProfie = popUpProfile.querySelector(".popup__form");
+const popUpCloseProfile = popUpProfile.querySelector(".popup__close");
+const nameInput = popUpProfile.querySelector(".popup__input_type_name");
+const jobInput = popUpProfile.querySelector(".popup__input_type_description");
 
 //Popup Card
-const popUpElement = document.querySelector('.popup_type_new-card');
-const popUpContent = popUpElement.querySelector('.popup__content')
-const popUpClose = popUpElement.querySelector('.popup__close');
-const popUpForm = popUpElement.querySelector('.popup__form');
-const popUpFormNameValue = popUpForm.querySelector(
-  '.popup__input_type_card-name',
-);
-const popUpFormLinkValue = popUpForm.querySelector('.popup__input_type_url');
+const popUpElement = document.querySelector(".popup_type_new-card");
+const popUpContent = popUpElement.querySelector(".popup__content");
+const popUpClose = popUpElement.querySelector(".popup__close");
+const popUpForm = popUpElement.querySelector(".popup__form");
+const popUpFormNameValue = popUpForm.querySelector(".popup__input_type_card-name");
+
+const popUpFormLinkValue = popUpForm.querySelector(".popup__input_type_url");
 //Добавление картинок
 headerLogo.src = headerLogoImg;
 headerProfile.style.backgroundImage = `url('${avatar}')`;
 
 //Функция открытия модального окна профиля
 function handleFormSubmit(event) {
-
   profileTitle.textContent = nameInput.value;
   profileDescriptions.textContent = jobInput.value;
 
-  nameInput.setAttribute('value', profileTitle.textContent);
-  jobInput.setAttribute('value', profileDescriptions.textContent);
+  nameInput.setAttribute("value", profileTitle.textContent);
+  jobInput.setAttribute("value", profileDescriptions.textContent);
 }
 
-nameInput.setAttribute('value', profileTitle.textContent);
-jobInput.setAttribute('value', profileDescriptions.textContent);
+nameInput.setAttribute("value", profileTitle.textContent);
+jobInput.setAttribute("value", profileDescriptions.textContent);
 
 //События открытия окна с созданием карточками
-addPlacesBtn.addEventListener('click', (event) => {
+addPlacesBtn.addEventListener("click", (event) => {
   //Открытие формы
   openModal(popUpElement);
 
-
   //Закрытие формы
-  popUpClose.addEventListener('click', (event) => {
+  popUpClose.addEventListener("click", (event) => {
     closeModal(popUpElement, event);
   });
-  
-  popUpElement.addEventListener('mousedown', (event)=>{
-    closeModal(popUpElement, event)
-  })
 
-  popUpContent.addEventListener('mousedown', (event)=>{
-    event.stopPropagation()
-  })  
+  popUpElement.addEventListener("mousedown", (event) => {
+    closeModal(popUpElement, event);
+  });
 });
 
 //Сохранение новой карточки
-popUpForm.addEventListener('submit', (event) => {
+popUpForm.addEventListener("submit", (event) => {
   placesList.prepend(
     createCard(
       popUpFormNameValue.value,
       popUpFormLinkValue.value,
       deleteCard,
-      likeCard,
-    ),
+      likeCard
+    )
   );
   event.preventDefault();
   event.target.reset();
 });
 
-
 //Событие открытия окна с профилем
-profileEditeBtn.addEventListener('click', () => {
+profileEditeBtn.addEventListener("click", () => {
   openModal(popUpProfile);
 
-  popUpFormProfie.addEventListener('submit', (event) => {
+  popUpFormProfie.addEventListener("submit", (event) => {
     handleFormSubmit(event);
   });
 
-  popUpCloseProfile.addEventListener('click', (event) => {
+  popUpCloseProfile.addEventListener("click", (event) => {
     closeModal(popUpProfile, event);
   });
 
-  popUpProfile.addEventListener('mousedown', (event) => {
-    closeModal(popUpProfile, event)
-  })
-
-  popUpContentProfile.addEventListener('mousedown', (event)=>{
-    event.stopPropagation()
-  })
+  popUpProfile.addEventListener("mousedown", (event) => {
+    closeModal(popUpProfile, event);
+  });
 });
 
 //Вывести карточки на страницу
 initialCards.forEach((element) =>
   placesList.append(
-    createCard(element.name, element.link, deleteCard, likeCard),
-  ),
+    createCard(element.name, element.link, deleteCard, likeCard)
+  )
 );
 
 export { placesList, popUpClose, handleFormSubmit, popUpProfile };

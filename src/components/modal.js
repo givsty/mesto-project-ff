@@ -9,7 +9,9 @@ function openModal(element) {
 }
 
 function closeModal(element, event) {
-  element.classList.remove('popup_is-opened');
+  if(event.target === element) {
+    element.classList.remove('popup_is-opened');
+  }
 }
 
 function closeModalOnBg(element) {
