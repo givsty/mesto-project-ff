@@ -1,7 +1,6 @@
 import initialCards from '../cards';
 import { placesList } from '../index';
 import { openModal, closeModal } from './modal';
-import { keyHandler } from './modal';
 
 //Темплейт карточки
 const templateCards = document.querySelector('#card-template').content;

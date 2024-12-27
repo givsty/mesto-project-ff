@@ -1,6 +1,5 @@
 import { createCard, deleteCard, likeCard } from './components/card';
 import { openModal, closeModal } from './components/modal';
-import { keyHandler } from './components/modal';
 import './pages/index.css';
 import initialCards from './cards';
 import headerLogoImg from './images/logo.svg';
