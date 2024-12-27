@@ -55,8 +55,7 @@ function handleFormSubmit(event) {
 nameInput.setAttribute('value', profileTitle.textContent);
 jobInput.setAttribute('value', profileDescriptions.textContent);
 
-//Сохранение новой карточки
-popUpForm.addEventListener('submit', (event) => {
+function addNewCard(event) {
   placesList.prepend(
     createCard(
       popUpFormNameValue.value,
@@ -68,7 +67,7 @@ popUpForm.addEventListener('submit', (event) => {
   closeModal(popUpElement);
   event.preventDefault();
   event.target.reset();
-});
+}
 
 //Вывести карточки на страницу
 initialCards.forEach((element) =>
@@ -76,6 +75,9 @@ initialCards.forEach((element) =>
     createCard(element.name, element.link, deleteCard, likeCard),
   ),
 );
+
+//Сохранение новой карточки
+popUpForm.addEventListener('submit', addNewCard);
 
 //События открытия окна с созданием карточками
 addPlacesBtn.addEventListener('click', (event) => {
