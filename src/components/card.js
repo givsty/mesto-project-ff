@@ -39,9 +39,7 @@ function createCard(name, link, deleteCard, likeCard) {
       closeModal(popUpElementImg, event);
     });
 
-    popUpElementImg.addEventListener('mousedown', (event) => {
-      closeModal(popUpElementImg, event);
-    });
+    closeModalOnBg(popUpElementImg);
   });
 
   cardName.textContent = name;
@@ -50,6 +48,7 @@ function createCard(name, link, deleteCard, likeCard) {
 
   return cardElement;
 }
+
 //Функция удаления карточки
 function deleteCard(element) {
   element.closest('.places__item').remove();

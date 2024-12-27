@@ -9,20 +9,21 @@ function openModal(element) {
 }
 
 function closeModal(element, event) {
-  const popUpIsOpenedCheck = document.querySelector('.popup_is-opened');
-  if (event.target === popUpIsOpenedCheck) {
-    element.classList.remove('popup_is-opened');
-  } else if (event.target === element.querySelector('.popup__close')) {
+  if(event.target === element) {
     element.classList.remove('popup_is-opened');
   }
-  document.removeEventListener('keydown', handleEscape); 
 }
 
-function handleEscape(event) {
+
+function keyHandler(event, element) {
   if (event.key === 'Escape') {
-    const openedPopup = document.querySelector('.popup_is-opened')
-    
+    closeModal(element, event);
+  }
+
+  if (event.key === 'Enter' && element == popUpProfile) {
+    handleFormSubmit(event);
+    closeModal(element);
   }
 }
 
-export { openModal, closeModal};
+export { openModal, closeModal, keyHandler };

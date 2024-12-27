@@ -48,6 +48,7 @@ function handleFormSubmit(event) {
 
   nameInput.setAttribute("value", profileTitle.textContent);
   jobInput.setAttribute("value", profileDescriptions.textContent);
+  closeModal(popUpProfile)
 }
 
 nameInput.setAttribute("value", profileTitle.textContent);
@@ -66,7 +67,6 @@ addPlacesBtn.addEventListener("click", (event) => {
   popUpElement.addEventListener("mousedown", (event) => {
     closeModal(popUpElement, event);
   });
-
 });
 
 //Сохранение новой карточки
@@ -79,26 +79,26 @@ popUpForm.addEventListener("submit", (event) => {
       likeCard
     )
   );
+  closeModal(popUpElement)
   event.preventDefault();
   event.target.reset();
 });
 
 //Событие открытия окна с профилем
-profileEditeBtn.addEventListener("click", (event) => {
+profileEditeBtn.addEventListener("click", () => {
   openModal(popUpProfile);
 
   popUpFormProfie.addEventListener("submit", (event) => {
     handleFormSubmit(event);
   });
 
-  popUpCloseProfile.addEventListener("click", (event) => {
-    closeModal(popUpProfile, event);
-  });
+popUpClose.addEventListener("click", () => {
+  closeModal(popUpElement);
+});
 
   popUpProfile.addEventListener("mousedown", (event) => {
     closeModal(popUpProfile, event);
   });
-
 });
 
 //Вывести карточки на страницу
@@ -107,5 +107,23 @@ initialCards.forEach((element) =>
     createCard(element.name, element.link, deleteCard, likeCard)
   )
 );
+
+//Событие открытия окна с профилем
+profileEditeBtn.addEventListener("click", () => {
+  openModal(popUpProfile);
+});
+
+popUpFormProfie.addEventListener("submit", handleFormSubmit)
+
+popUpCloseProfile.addEventListener("click", (event) => {
+  closeModal(popUpProfile, event);
+});
+
+popUpProfile.addEventListener("mousedown", (event) => {
+  if(event.target === popUpProfile) {
+    closeModal(popUpProfile);
+  }
+});
+
 
 export { placesList, popUpClose, handleFormSubmit, popUpProfile };
