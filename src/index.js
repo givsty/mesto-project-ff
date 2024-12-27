@@ -30,7 +30,6 @@ const jobInput = popUpProfile.querySelector(".popup__input_type_description");
 
 //Popup Card
 const popUpElement = document.querySelector(".popup_type_new-card");
-const popUpContent = popUpElement.querySelector(".popup__content");
 const popUpClose = popUpElement.querySelector(".popup__close");
 const popUpForm = popUpElement.querySelector(".popup__form");
 const popUpFormNameValue = popUpForm.querySelector(".popup__input_type_card-name");
@@ -55,6 +54,21 @@ function handleFormSubmit(event) {
 nameInput.setAttribute("value", profileTitle.textContent);
 jobInput.setAttribute("value", profileDescriptions.textContent);
 
+//События открытия окна с созданием карточками
+addPlacesBtn.addEventListener("click", (event) => {
+  //Открытие формы
+  openModal(popUpElement);
+
+  //Закрытие формы
+  popUpClose.addEventListener("click", (event) => {
+    closeModal(popUpElement, event);
+  });
+
+  popUpElement.addEventListener("mousedown", (event) => {
+    closeModal(popUpElement, event);
+  });
+});
+
 //Сохранение новой карточки
 popUpForm.addEventListener("submit", (event) => {
   placesList.prepend(
@@ -70,20 +84,21 @@ popUpForm.addEventListener("submit", (event) => {
   event.target.reset();
 });
 
-//События открытия окна с созданием карточками
-addPlacesBtn.addEventListener("click", (event) => {
-  //Открытие формы
-  openModal(popUpElement);
-});
+//Событие открытия окна с профилем
+profileEditeBtn.addEventListener("click", () => {
+  openModal(popUpProfile);
+
+  popUpFormProfie.addEventListener("submit", (event) => {
+    handleFormSubmit(event);
+  });
 
 popUpClose.addEventListener("click", () => {
   closeModal(popUpElement);
 });
 
-popUpElement.addEventListener("mousedown", (event) => {
-  if(event.target === popUpElement) {
-    closeModal(popUpElement);
-  }
+  popUpProfile.addEventListener("mousedown", (event) => {
+    closeModal(popUpProfile, event);
+  });
 });
 
 //Вывести карточки на страницу
