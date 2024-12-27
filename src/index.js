@@ -49,25 +49,11 @@ function handleFormSubmit(event) {
 
   nameInput.setAttribute("value", profileTitle.textContent);
   jobInput.setAttribute("value", profileDescriptions.textContent);
+  closeModal(popUpProfile)
 }
 
 nameInput.setAttribute("value", profileTitle.textContent);
 jobInput.setAttribute("value", profileDescriptions.textContent);
-
-//События открытия окна с созданием карточками
-addPlacesBtn.addEventListener("click", (event) => {
-  //Открытие формы
-  openModal(popUpElement);
-
-  //Закрытие формы
-  popUpClose.addEventListener("click", (event) => {
-    closeModal(popUpElement, event);
-  });
-
-  popUpElement.addEventListener("mousedown", (event) => {
-    closeModal(popUpElement, event);
-  });
-});
 
 //Сохранение новой карточки
 popUpForm.addEventListener("submit", (event) => {
@@ -79,25 +65,25 @@ popUpForm.addEventListener("submit", (event) => {
       likeCard
     )
   );
+  closeModal(popUpElement)
   event.preventDefault();
   event.target.reset();
 });
 
-//Событие открытия окна с профилем
-profileEditeBtn.addEventListener("click", () => {
-  openModal(popUpProfile);
+//События открытия окна с созданием карточками
+addPlacesBtn.addEventListener("click", (event) => {
+  //Открытие формы
+  openModal(popUpElement);
+});
 
-  popUpFormProfie.addEventListener("submit", (event) => {
-    handleFormSubmit(event);
-  });
+popUpClose.addEventListener("click", () => {
+  closeModal(popUpElement);
+});
 
-  popUpCloseProfile.addEventListener("click", (event) => {
-    closeModal(popUpProfile, event);
-  });
-
-  popUpProfile.addEventListener("mousedown", (event) => {
-    closeModal(popUpProfile, event);
-  });
+popUpElement.addEventListener("mousedown", (event) => {
+  if(event.target === popUpElement) {
+    closeModal(popUpElement);
+  }
 });
 
 //Вывести карточки на страницу
@@ -106,5 +92,23 @@ initialCards.forEach((element) =>
     createCard(element.name, element.link, deleteCard, likeCard)
   )
 );
+
+//Событие открытия окна с профилем
+profileEditeBtn.addEventListener("click", () => {
+  openModal(popUpProfile);
+});
+
+popUpFormProfie.addEventListener("submit", handleFormSubmit)
+
+popUpCloseProfile.addEventListener("click", (event) => {
+  closeModal(popUpProfile, event);
+});
+
+popUpProfile.addEventListener("mousedown", (event) => {
+  if(event.target === popUpProfile) {
+    closeModal(popUpProfile);
+  }
+});
+
 
 export { placesList, popUpClose, handleFormSubmit, popUpProfile };
