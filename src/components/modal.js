@@ -8,22 +8,16 @@ function openModal(element) {
   document.addEventListener('keydown', handleEscape);
 }
 
-function closeModal(element, event) {
-  if(event.target === element) {
-    element.classList.remove('popup_is-opened');
-  }
+function closeModal(element) {
+  element.classList.remove('popup_is-opened')
+  document.removeEventListener('keydown', handleEscape); 
 }
 
-
-function keyHandler(event, element) {
+function handleEscape(event) {
   if (event.key === 'Escape') {
-    closeModal(element, event);
-  }
-
-  if (event.key === 'Enter' && element == popUpProfile) {
-    handleFormSubmit(event);
-    closeModal(element);
+    const openedPopup = document.querySelector('.popup_is-opened')
+    closeModal(openedPopup)
   }
 }
 
-export { openModal, closeModal, keyHandler };
+export { openModal, closeModal};
