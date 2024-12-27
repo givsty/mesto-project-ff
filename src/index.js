@@ -1,7 +1,7 @@
-import { createCard, deleteCard, likeCard } from './card';
-import { openModal, closeModal } from './modal';
+import { createCard, deleteCard, likeCard } from './components/card';
+import { openModal, closeModal } from './components/modal';
 import './pages/index.css';
-import initialCards from './cards';
+import initialCards from './components/cards';
 import headerLogoImg from './images/logo.svg';
 import avatar from './images/avatar.jpg';
 
