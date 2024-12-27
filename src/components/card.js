@@ -33,15 +33,19 @@ function createCard(name, link, deleteCard, likeCard) {
     popUpImg.src = link;
     popUpDescriptions.textContent = name;
 
-    openModal(popUpElementImg);
-
-    popUpCloseImg.addEventListener('click', (event) => {
-      closeModal(popUpElementImg, event);
-    });
-
-    closeModalOnBg(popUpElementImg);
+    openModal(popUpElementImg)
   });
 
+  popUpCloseImg.addEventListener('click', () => {
+    closeModal(popUpElementImg);
+  });
+
+  popUpElementImg.addEventListener('mousedown', (event)=>{
+    if(event.target === popUpElementImg) {
+      closeModal(popUpElementImg);
+    }
+  })
+  
   cardName.textContent = name;
   cardImage.src = link;
   cardImage.alt = name;
