@@ -1,4 +1,4 @@
-import initialCards from '../cards';
+import initialCards from './cards';
 import { placesList } from '../index';
 import { openModal, closeModal } from './modal';
 
