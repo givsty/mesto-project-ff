@@ -27,14 +27,14 @@ const nameInput = popUpProfile.querySelector('.popup__input_type_name');
 const jobInput = popUpProfile.querySelector('.popup__input_type_description');
 
 //Popup Card
-const popUpElement = document.querySelector('.popup_type_new-card');
-const popUpClose = popUpElement.querySelector('.popup__close');
-const popUpForm = popUpElement.querySelector('.popup__form');
-const popUpFormNameValue = popUpForm.querySelector(
+const popUpElementCard = document.querySelector('.popup_type_new-card');
+const popUpCloseCard = popUpElementCard.querySelector('.popup__close');
+const popUpFormCard = popUpElementCard.querySelector('.popup__form');
+const popUpFormNameValueCard = popUpFormCard.querySelector(
   '.popup__input_type_card-name',
 );
 
-const popUpFormLinkValue = popUpForm.querySelector('.popup__input_type_url');
+const popUpFormLinkValueCard = popUpFormCard.querySelector('.popup__input_type_url');
 
 //Добавление картинок
 headerLogo.src = headerLogoImg;
@@ -57,13 +57,13 @@ jobInput.setAttribute('value', profileDescriptions.textContent);
 function addNewCard(event) {
   placesList.prepend(
     createCard(
-      popUpFormNameValue.value,
-      popUpFormLinkValue.value,
+      popUpFormNameValueCard.value,
+      popUpFormLinkValueCard.value,
       deleteCard,
       likeCard,
     ),
   );
-  closeModal(popUpElement);
+  closeModal(popUpElementCard);
   event.preventDefault();
 }
 
@@ -75,21 +75,21 @@ initialCards.forEach((element) =>
 );
 
 //Сохранение новой карточки
-popUpForm.addEventListener('submit', addNewCard);
+popUpFormCard.addEventListener('submit', addNewCard);
 
 //События открытия окна с созданием карточками
 addPlacesBtn.addEventListener('click', (event) => {
-  popUpForm.reset();
-  openModal(popUpElement);
+  popUpFormCard.reset();
+  openModal(popUpElementCard);
 });
 
-popUpClose.addEventListener('click', () => {
-  closeModal(popUpElement);
+popUpCloseCard.addEventListener('click', () => {
+  closeModal(popUpElementCard);
 });
 
-popUpElement.addEventListener('mousedown', (event) => {
-  if (event.target === popUpElement) {
-    closeModal(popUpElement);
+popUpElementCard.addEventListener('mousedown', (event) => {
+  if (event.target === popUpElementCard) {
+    closeModal(popUpElementCard);
   }
 });
 
@@ -111,4 +111,4 @@ popUpProfile.addEventListener('mousedown', (event) => {
   }
 });
 
-export { placesList, popUpClose, handleFormSubmit, popUpProfile };
+export { placesList, handleFormSubmit, popUpProfile };
