@@ -80,7 +80,7 @@ popUpForm.addEventListener('submit', addNewCard);
 
 //События открытия окна с созданием карточками
 addPlacesBtn.addEventListener('click', (event) => {
-  //Открытие формы
+  popUpForm.reset()
   openModal(popUpElement);
 });
 
@@ -96,25 +96,7 @@ popUpElement.addEventListener('mousedown', (event) => {
 
 //Событие открытия окна с профилем
 profileEditeBtn.addEventListener('click', () => {
-  openModal(popUpProfile);
-});
-
-popUpFormProfie.addEventListener('submit', (event) => {
-  handleFormSubmit(event);
-});
-
-popUpClose.addEventListener('click', () => {
-  closeModal(popUpElement);
-});
-
-popUpProfile.addEventListener('mousedown', (event) => {
-  if (event.target === popUpProfile) {
-    closeModal(popUpProfile, event);
-  }
-});
-
-//Событие открытия окна с профилем
-profileEditeBtn.addEventListener('click', () => {
+  popUpFormProfie.reset()
   openModal(popUpProfile);
 });
 
