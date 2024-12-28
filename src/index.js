@@ -65,7 +65,6 @@ function addNewCard(event) {
   );
   closeModal(popUpElement);
   event.preventDefault();
-  event.target.reset();
 }
 
 //Вывести карточки на страницу
