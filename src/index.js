@@ -80,7 +80,7 @@ popUpForm.addEventListener('submit', addNewCard);
 
 //События открытия окна с созданием карточками
 addPlacesBtn.addEventListener('click', (event) => {
-  popUpForm.reset()
+  popUpForm.reset();
   openModal(popUpElement);
 });
 
@@ -96,7 +96,7 @@ popUpElement.addEventListener('mousedown', (event) => {
 
 //Событие открытия окна с профилем
 profileEditeBtn.addEventListener('click', () => {
-  popUpFormProfie.reset()
+  popUpFormProfie.reset();
   openModal(popUpProfile);
 });
 
@@ -111,6 +111,5 @@ popUpProfile.addEventListener('mousedown', (event) => {
     closeModal(popUpProfile);
   }
 });
-
 
 export { placesList, popUpClose, handleFormSubmit, popUpProfile };
