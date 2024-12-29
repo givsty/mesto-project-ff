@@ -111,4 +111,4 @@ popUpProfile.addEventListener('mousedown', (event) => {
   }
 });
 
-export { placesList, handleFormSubmit, popUpProfile };
+export { placesList };
