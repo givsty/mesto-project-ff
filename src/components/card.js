@@ -1,10 +1,7 @@
-import initialCards from './cards';
-import { placesList } from '../index';
 import { openModal, closeModal } from './modal';
 
 //Темплейт карточки
 const templateCards = document.querySelector('#card-template').content;
-
 //Popup image
 const popUpElementImg = document.querySelector('.popup_type_image');
 const popUpImg = popUpElementImg.querySelector('.popup__image');
@@ -19,13 +16,11 @@ function createCard(name, link, deleteCard, likeCard) {
   const cardName = cardElement.querySelector('.card__title');
   const cardImage = cardElement.querySelector('.card__image');
   const deleteCardBtn = cardElement.querySelector('.card__delete-button');
-  const cardElementCheked = document.querySelectorAll('.places__item');
+  const cardLikeButton = cardElement.querySelector('.card__like-button')
 
-  deleteCardBtn.addEventListener('click', (event) => deleteCard(event.target));
+  deleteCardBtn.addEventListener('click', deleteCard);
 
-  placesList.addEventListener('click', (event) => {
-    cardElementCheked.length === initialCards.length - 1 ? likeCard(event) : '';
-  });
+  cardLikeButton.addEventListener('click', likeCard);
 
   //Открытие модального окна у изображения, находящегося в карточке
   cardImage.addEventListener('click', () => {
@@ -53,12 +48,13 @@ function createCard(name, link, deleteCard, likeCard) {
 }
 
 //Функция удаления карточки
-function deleteCard(element) {
-  element.closest('.places__item').remove();
+function deleteCard(event) {
+  event.target.closest('.places__item').remove();
 }
 
 //Функция лайка карточки
 function likeCard(event) {
+  console.log(event.target)
   if (event.target.classList.contains('card__like-button')) {
     event.target.classList.toggle('card__like-button_is-active');
   }

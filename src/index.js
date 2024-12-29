@@ -110,5 +110,3 @@ popUpProfile.addEventListener('mousedown', (event) => {
     closeModal(popUpProfile);
   }
 });
-
-export { placesList };
