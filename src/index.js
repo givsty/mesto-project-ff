@@ -41,7 +41,7 @@ headerLogo.src = headerLogoImg;
 headerProfile.style.backgroundImage = `url('${avatar}')`;
 
 //Функция открытия модального окна профиля
-function handleFormSubmit(event) {
+function handleProfileFormSubmit(event) {
   event.preventDefault();
   profileTitle.textContent = nameInput.value;
   profileDescriptions.textContent = jobInput.value;
@@ -51,8 +51,8 @@ function handleFormSubmit(event) {
   closeModal(popUpProfile);
 }
 
-nameInput.setAttribute('value', profileTitle.textContent);
-jobInput.setAttribute('value', profileDescriptions.textContent);
+// nameInput.setAttribute('value', profileTitle.textContent);
+// jobInput.setAttribute('value', profileDescriptions.textContent);
 
 function addNewCard(event) {
   placesList.prepend(
@@ -79,7 +79,6 @@ popUpFormCard.addEventListener('submit', addNewCard);
 
 //События открытия окна с созданием карточками
 addPlacesBtn.addEventListener('click', (event) => {
-  popUpFormCard.reset();
   openModal(popUpElementCard);
 });
 
@@ -94,12 +93,12 @@ popUpElementCard.addEventListener('mousedown', (event) => {
 });
 
 //Событие открытия окна с профилем
-profileEditeBtn.addEventListener('click', () => {
+profileEditeBtn.addEventListener('click', (event) => {
   popUpFormProfie.reset();
   openModal(popUpProfile);
 });
 
-popUpFormProfie.addEventListener('submit', handleFormSubmit);
+popUpFormProfie.addEventListener('submit', handleProfileFormSubmit);
 
 popUpCloseProfile.addEventListener('click', () => {
   closeModal(popUpProfile);
