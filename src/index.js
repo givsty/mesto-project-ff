@@ -34,6 +34,12 @@ const popUpFormNameValueCard = popUpFormCard.querySelector(
   '.popup__input_type_card-name',
 );
 
+// //PopUpImg Доделать
+// const popUpElementImg = document.querySelector('.popup_type_image');
+// const popUpImg = popUpElementImg.querySelector('.popup__image');
+// const popUpDescriptions = popUpElementImg.querySelector('.popup__caption');
+// const popUpCloseImg = popUpElementImg.querySelector('.popup__close');
+
 const popUpFormLinkValueCard = popUpFormCard.querySelector('.popup__input_type_url');
 
 //Добавление картинок
@@ -51,6 +57,12 @@ function handleProfileFormSubmit(event) {
   closeModal(popUpProfile);
 }
 
+function handleImageClick (name, link) {
+  popUpImg.src = link;
+  popUpImg.alt = name;
+  popUpDescriptions.textContent = name;
+  openModal(popUpElementImg)
+}
 // nameInput.setAttribute('value', profileTitle.textContent);
 // jobInput.setAttribute('value', profileDescriptions.textContent);
 
