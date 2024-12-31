@@ -126,7 +126,6 @@ popUpElementImg.addEventListener('mousedown', (event) => {
 
 //Событие открытия окна с профилем
 profileEditeBtn.addEventListener('click', (event) => {
-  popUpFormProfie.reset();
   openModal(popUpProfile);
 });
 
