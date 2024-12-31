@@ -33,14 +33,15 @@ const popUpFormCard = popUpElementCard.querySelector('.popup__form');
 const popUpFormNameValueCard = popUpFormCard.querySelector(
   '.popup__input_type_card-name',
 );
+const popUpFormLinkValueCard = popUpFormCard.querySelector(
+  '.popup__input_type_url',
+);
 
 // //PopUpImg Доделать
-// const popUpElementImg = document.querySelector('.popup_type_image');
-// const popUpImg = popUpElementImg.querySelector('.popup__image');
-// const popUpDescriptions = popUpElementImg.querySelector('.popup__caption');
-// const popUpCloseImg = popUpElementImg.querySelector('.popup__close');
-
-const popUpFormLinkValueCard = popUpFormCard.querySelector('.popup__input_type_url');
+const popUpElementImg = document.querySelector('.popup_type_image');
+const popUpImg = popUpElementImg.querySelector('.popup__image');
+const popUpDescriptions = popUpElementImg.querySelector('.popup__caption');
+const popUpCloseImg = popUpElementImg.querySelector('.popup__close');
 
 //Добавление картинок
 headerLogo.src = headerLogoImg;
@@ -57,12 +58,13 @@ function handleProfileFormSubmit(event) {
   closeModal(popUpProfile);
 }
 
-function handleImageClick (name, link) {
+function handleImageClick(name, link) {
   popUpImg.src = link;
   popUpImg.alt = name;
   popUpDescriptions.textContent = name;
-  openModal(popUpElementImg)
+  openModal(popUpElementImg);
 }
+
 // nameInput.setAttribute('value', profileTitle.textContent);
 // jobInput.setAttribute('value', profileDescriptions.textContent);
 
@@ -73,6 +75,7 @@ function addNewCard(event) {
       popUpFormLinkValueCard.value,
       deleteCard,
       likeCard,
+      handleImageClick,
     ),
   );
   closeModal(popUpElementCard);
@@ -82,7 +85,13 @@ function addNewCard(event) {
 //Вывести карточки на страницу
 initialCards.forEach((element) =>
   placesList.append(
-    createCard(element.name, element.link, deleteCard, likeCard),
+    createCard(
+      element.name,
+      element.link,
+      deleteCard,
+      likeCard,
+      handleImageClick,
+    ),
   ),
 );
 
@@ -101,6 +110,17 @@ popUpCloseCard.addEventListener('click', () => {
 popUpElementCard.addEventListener('mousedown', (event) => {
   if (event.target === popUpElementCard) {
     closeModal(popUpElementCard);
+  }
+});
+
+// Действия с изображением, находящимся в карточке
+popUpCloseImg.addEventListener('click', () => {
+  closeModal(popUpElementImg);
+});
+
+popUpElementImg.addEventListener('mousedown', (event) => {
+  if (event.target === popUpElementImg) {
+    closeModal(popUpElementImg);
   }
 });
 

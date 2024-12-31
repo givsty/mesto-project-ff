@@ -1,15 +1,11 @@
-import { openModal, closeModal } from './modal';
-
 //Темплейт карточки
 const templateCards = document.querySelector('#card-template').content;
+
 //Popup image
-  const popUpElementImg = document.querySelector('.popup_type_image');
-  const popUpImg = popUpElementImg.querySelector('.popup__image');
-  const popUpDescriptions = popUpElementImg.querySelector('.popup__caption');
-  const popUpCloseImg = popUpElementImg.querySelector('.popup__close');
+const popUpElementImg = document.querySelector('.popup_type_image');
 
 //Функция создания карточки
-function createCard(name, link, deleteCard, likeCard) {
+function createCard(name, link, deleteCard, likeCard, handleImageClick) {
   const cardElement = templateCards
     .querySelector('.places__item')
     .cloneNode(true);
@@ -24,23 +20,9 @@ function createCard(name, link, deleteCard, likeCard) {
 
   //Открытие модального окна у изображения, находящегося в карточке
   cardImage.addEventListener('click', () => {
-    popUpImg.src = link;
-    popUpImg.alt = name;
-    popUpDescriptions.textContent = name;
-
-    openModal(popUpElementImg)
+    handleImageClick(name, link)
   });
 
-  popUpCloseImg.addEventListener('click', () => {
-    closeModal(popUpElementImg);
-  });
-
-  popUpElementImg.addEventListener('mousedown', (event)=>{
-    if(event.target === popUpElementImg) {
-      closeModal(popUpElementImg);
-    }
-  })
-  
   cardName.textContent = name;
   cardImage.src = link;
   cardImage.alt = name;
