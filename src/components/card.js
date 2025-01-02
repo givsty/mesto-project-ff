@@ -1,11 +1,8 @@
 //Темплейт карточки
 const templateCards = document.querySelector('#card-template').content;
 
-//Popup image
-const popUpElementImg = document.querySelector('.popup_type_image');
-
 //Функция создания карточки
-function createCard(name, link, deleteCard, likeCard, handleImageClick) {
+function createCard({name, link, deleteCard, likeCard, handleImageClick}) {
   const cardElement = templateCards
     .querySelector('.places__item')
     .cloneNode(true);

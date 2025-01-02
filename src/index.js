@@ -17,23 +17,23 @@ const headerLogo = document.querySelector('.header__logo');
 //Section profile
 const headerProfile = document.querySelector('.profile__image');
 
+//Common forms
+const formProfile = document.forms['edit-profile'];
+const formCard = document.forms['new-place'];
+
 //Popup profile
 const profileTitle = document.querySelector('.profile__title');
 const profileDescriptions = document.querySelector('.profile__description');
 const popUpProfile = document.querySelector('.popup_type_edit');
-const popUpFormProfie = popUpProfile.querySelector('.popup__form');
 const nameInput = popUpProfile.querySelector('.popup__input_type_name');
 const jobInput = popUpProfile.querySelector('.popup__input_type_description');
 
 //Popup Card
 const popUpElementCard = document.querySelector('.popup_type_new-card');
-const popUpFormCard = popUpElementCard.querySelector('.popup__form');
-const popUpFormNameValueCard = popUpFormCard.querySelector(
+const popUpFormNameValueCard = formCard.querySelector(
   '.popup__input_type_card-name',
 );
-const popUpFormLinkValueCard = popUpFormCard.querySelector(
-  '.popup__input_type_url',
-);
+const popUpFormLinkValueCard = formCard.querySelector('.popup__input_type_url');
 
 // //PopUpImg Доделать
 const popUpElementImg = document.querySelector('.popup_type_image');
@@ -47,11 +47,22 @@ headerProfile.style.backgroundImage = `url('${avatar}')`;
 //Функция открытия модального окна профиля
 function handleProfileFormSubmit(event) {
   event.preventDefault();
-  
+
   profileTitle.textContent = nameInput.value;
   profileDescriptions.textContent = jobInput.value;
 
   closeModal(popUpProfile);
+}
+
+//TODO
+function renderCard() {
+  switch (position) {
+    case 'append':
+      break;
+
+    default:
+      break;
+  }
 }
 
 function handleImageClick(name, link) {
@@ -69,13 +80,13 @@ function renderPopupProfile() {
 
 function addNewCard(event) {
   placesList.prepend(
-    createCard(
-      popUpFormNameValueCard.value,
-      popUpFormLinkValueCard.value,
-      deleteCard,
-      likeCard,
-      handleImageClick,
-    ),
+    createCard({
+      name: popUpFormNameValueCard.value,
+      link: popUpFormLinkValueCard.value,
+      deleteCard: deleteCard,
+      likeCard: likeCard,
+      handleImageClick: handleImageClick,
+    }),
   );
   closeModal(popUpElementCard);
   event.preventDefault();
@@ -84,18 +95,18 @@ function addNewCard(event) {
 //Вывести карточки на страницу
 initialCards.forEach((element) =>
   placesList.append(
-    createCard(
-      element.name,
-      element.link,
-      deleteCard,
-      likeCard,
-      handleImageClick,
-    ),
+    createCard({
+      name: element.name,
+      link: element.link,
+      deleteCard: deleteCard,
+      likeCard: likeCard,
+      handleImageClick: handleImageClick,
+    }),
   ),
 );
 
 //Сохранение новой карточки
-popUpFormCard.addEventListener('submit', addNewCard);
+formCard.addEventListener('submit', addNewCard);
 
 //События открытия окна с созданием карточками
 addPlacesBtn.addEventListener('click', (event) => {
@@ -105,7 +116,7 @@ addPlacesBtn.addEventListener('click', (event) => {
 //Событие открытия окна с профилем
 profileEditeBtn.addEventListener('click', renderPopupProfile);
 
-popUpFormProfie.addEventListener('submit', handleProfileFormSubmit);
+formProfile.addEventListener('submit', handleProfileFormSubmit);
 
 popups.forEach((popup) => {
   popup.addEventListener('mousedown', (event) => {
