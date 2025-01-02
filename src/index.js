@@ -10,7 +10,7 @@ const addPlacesBtn = document.querySelector('.profile__add-button');
 const profileEditeBtn = document.querySelector('.profile__edit-button');
 const places = document.querySelector('.places');
 const placesList = places.querySelector('.places__list');
-const popups = document.querySelectorAll('.popup')
+const popups = document.querySelectorAll('.popup');
 //Header
 const headerLogo = document.querySelector('.header__logo');
 
@@ -62,6 +62,12 @@ function handleImageClick(name, link) {
   openModal(popUpElementImg);
 }
 
+function renderPopupProfile() {
+  nameInput.setAttribute('value', profileTitle.textContent);
+  jobInput.setAttribute('value', profileDescriptions.textContent);
+  openModal(popUpProfile);
+}
+
 function addNewCard(event) {
   placesList.prepend(
     createCard(
@@ -98,21 +104,17 @@ addPlacesBtn.addEventListener('click', (event) => {
 });
 
 //Событие открытия окна с профилем
-profileEditeBtn.addEventListener('click', (event) => {
-  nameInput.setAttribute('value', profileTitle.textContent);
-  jobInput.setAttribute('value', profileDescriptions.textContent);
-  openModal(popUpProfile);
-});
+profileEditeBtn.addEventListener('click', renderPopupProfile);
 
 popUpFormProfie.addEventListener('submit', handleProfileFormSubmit);
 
 popups.forEach((popup) => {
-  popup.addEventListener('mousedown', (event)=>{
-    if(event.target.classList.contains('popup_is-opened')) {
-      closeModal(popup)
+  popup.addEventListener('mousedown', (event) => {
+    if (event.target.classList.contains('popup_is-opened')) {
+      closeModal(popup);
     }
-    if(event.target.classList.contains('popup__close')) {
-      closeModal(popup)
+    if (event.target.classList.contains('popup__close')) {
+      closeModal(popup);
     }
-  })
+  });
 });
