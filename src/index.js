@@ -47,11 +47,10 @@ headerProfile.style.backgroundImage = `url('${avatar}')`;
 //Функция открытия модального окна профиля
 function handleProfileFormSubmit(event) {
   event.preventDefault();
+  
   profileTitle.textContent = nameInput.value;
   profileDescriptions.textContent = jobInput.value;
 
-  nameInput.setAttribute('value', profileTitle.textContent);
-  jobInput.setAttribute('value', profileDescriptions.textContent);
   closeModal(popUpProfile);
 }
 
