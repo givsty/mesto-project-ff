@@ -110,10 +110,10 @@ popUpFormProfie.addEventListener('submit', handleProfileFormSubmit);
 
 popups.forEach((popup) => {
   popup.addEventListener('mousedown', (event) => {
-    if (event.target.classList.contains('popup_is-opened')) {
-      closeModal(popup);
-    }
-    if (event.target.classList.contains('popup__close')) {
+    if (
+      event.target.classList.contains('popup_is-opened') ||
+      event.target.classList.contains('popup__close')
+    ) {
       closeModal(popup);
     }
   });
