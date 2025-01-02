@@ -65,8 +65,6 @@ function handleImageClick(name, link) {
   openModal(popUpElementImg);
 }
 
-// nameInput.setAttribute('value', profileTitle.textContent);
-// jobInput.setAttribute('value', profileDescriptions.textContent);
 
 function addNewCard(event) {
   placesList.prepend(
@@ -126,6 +124,8 @@ popUpElementImg.addEventListener('mousedown', (event) => {
 
 //Событие открытия окна с профилем
 profileEditeBtn.addEventListener('click', (event) => {
+  nameInput.setAttribute('value', profileTitle.textContent);
+  jobInput.setAttribute('value', profileDescriptions.textContent);
   openModal(popUpProfile);
 });
 
