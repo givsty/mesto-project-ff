@@ -55,13 +55,7 @@ function handleProfileFormSubmit(event) {
 }
 
 function renderCard(element, method) {
-  const cardElement = createCard({
-    name: element.name,
-    link: element.link,
-    deleteCard: deleteCard,
-    likeCard: likeCard,
-    handleImageClick: handleImageClick,
-  });
+  const cardElement = createCard(element);
   placesList[method](cardElement);
 }
 
