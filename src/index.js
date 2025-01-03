@@ -54,6 +54,7 @@ function handleProfileFormSubmit(event) {
   closeModal(popUpProfile);
 }
 
+//Выбор метода
 function renderCard(element, method) {
   const cardElement = createCard(element);
   placesList[method](cardElement);
@@ -89,7 +90,18 @@ function addNewCard(event) {
 }
 
 //Вывести карточки на страницу
-initialCards.forEach((element) => renderCard(element, 'append'));
+initialCards.forEach((element) => {
+  renderCard(
+    {
+      name: element.name,
+      link: element.link,
+      deleteCard: deleteCard,
+      likeCard: likeCard,
+      handleImageClick: handleImageClick,
+    },
+    'append',
+  );
+});
 
 //Сохранение новой карточки
 formCard.addEventListener('submit', addNewCard);
