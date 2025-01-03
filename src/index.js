@@ -54,15 +54,15 @@ function handleProfileFormSubmit(event) {
   closeModal(popUpProfile);
 }
 
-//TODO
-function renderCard() {
-  switch (position) {
-    case 'append':
-      break;
-
-    default:
-      break;
-  }
+function renderCard(element, method) {
+  const cardElement = createCard({
+    name: element.name,
+    link: element.link,
+    deleteCard: deleteCard,
+    likeCard: likeCard,
+    handleImageClick: handleImageClick,
+  });
+  placesList[method](cardElement);
 }
 
 function handleImageClick(name, link) {
@@ -78,32 +78,24 @@ function renderPopupProfile() {
   openModal(popUpProfile);
 }
 
+//Добавление карточки
 function addNewCard(event) {
-  placesList.prepend(
-    createCard({
+  renderCard(
+    {
       name: popUpFormNameValueCard.value,
       link: popUpFormLinkValueCard.value,
       deleteCard: deleteCard,
       likeCard: likeCard,
       handleImageClick: handleImageClick,
-    }),
+    },
+    'prepend',
   );
   closeModal(popUpElementCard);
   event.preventDefault();
 }
 
 //Вывести карточки на страницу
-initialCards.forEach((element) =>
-  placesList.append(
-    createCard({
-      name: element.name,
-      link: element.link,
-      deleteCard: deleteCard,
-      likeCard: likeCard,
-      handleImageClick: handleImageClick,
-    }),
-  ),
-);
+initialCards.forEach((element) => renderCard(element, 'append'));
 
 //Сохранение новой карточки
 formCard.addEventListener('submit', addNewCard);
@@ -118,6 +110,7 @@ profileEditeBtn.addEventListener('click', renderPopupProfile);
 
 formProfile.addEventListener('submit', handleProfileFormSubmit);
 
+//Закрытие попапов
 popups.forEach((popup) => {
   popup.addEventListener('mousedown', (event) => {
     if (
