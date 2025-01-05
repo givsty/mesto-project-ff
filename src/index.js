@@ -4,6 +4,7 @@ import './pages/index.css';
 import initialCards from './components/cards';
 import headerLogoImg from './images/logo.svg';
 import avatar from './images/avatar.jpg';
+import { clearValidation, enableValidation } from './components/validation';
 
 //DOM узлы
 const addPlacesBtn = document.querySelector('.profile__add-button');
@@ -11,6 +12,7 @@ const profileEditeBtn = document.querySelector('.profile__edit-button');
 const places = document.querySelector('.places');
 const placesList = places.querySelector('.places__list');
 const popups = document.querySelectorAll('.popup');
+
 //Header
 const headerLogo = document.querySelector('.header__logo');
 
@@ -47,10 +49,8 @@ headerProfile.style.backgroundImage = `url('${avatar}')`;
 //Функция открытия модального окна профиля
 function handleProfileFormSubmit(event) {
   event.preventDefault();
-
   profileTitle.textContent = nameInput.value;
   profileDescriptions.textContent = jobInput.value;
-
   closeModal(popUpProfile);
 }
 
