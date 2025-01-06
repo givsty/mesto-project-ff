@@ -11,10 +11,19 @@ function enableValidation({
     formElement.addEventListener('submit', (event)=>{
       event.preventDefault()
     })
-    const input = document.querySelectorAll(`${inputSelector}`)
+    const input = formElement.querySelectorAll(`${inputSelector}`)
+    const buttonElement = formElement.querySelector(`${submitButtonSelector}`)
     input.forEach((inputElement)=>{
-      console.log(inputElement);
+      inputElement.addEventListener('input', (event)=>{
+        toggleButtonState(input, buttonElement, inactiveButtonClass)
+      })
     })
+  })
+}
+
+function hasInvalidInput(inputList) {
+  return some.inputList((inputElement)=>{
+    return !inputElement.validity.valid
   })
 }
 
@@ -22,7 +31,13 @@ function clearValidation() {
   return;
 }
 
-function buttonState() {
-
+function toggleButtonState(inputList, buttonElement, inactiveButtonClass) {
+  if(hasInvalidInput(inputList)) {
+    buttonElement.classList.add(`${inactiveButtonClass}`)
+  }else {
+    buttonElement.classList.remove(`${inactiveButtonClass}`)
+  }
 }
+
+
 export { enableValidation, clearValidation };
