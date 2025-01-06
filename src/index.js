@@ -46,6 +46,16 @@ const popUpDescriptions = popUpElementImg.querySelector('.popup__caption');
 headerLogo.src = headerLogoImg;
 headerProfile.style.backgroundImage = `url('${avatar}')`;
 
+//валидация 
+enableValidation({
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__button',
+  inactiveButtonClass: 'popup__button_disabled',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__error_visible'
+});
+
 //Функция открытия модального окна профиля
 function handleProfileFormSubmit(event) {
   event.preventDefault();
@@ -127,3 +137,4 @@ popups.forEach((popup) => {
     }
   });
 });
+
