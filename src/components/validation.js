@@ -6,14 +6,12 @@ function enableValidation({
   inputErrorClass,
   errorClass,
 }) {
-  const formList = Array.from(document.querySelectorAll(`${formSelector}`));
+  const formList = Array.from(document.querySelectorAll(formSelector));
   formList.forEach((formElement) => {
-    formElement.addEventListener('submit', (event) => {
-      event.preventDefault();
-    });
+    const inputList = Array.from(formElement.querySelectorAll(inputSelector))
     setEventListener({
       formElement,
-      inputSelector,
+      inputList,
       submitButtonSelector,
       inactiveButtonClass,
       inputErrorClass,
@@ -23,50 +21,34 @@ function enableValidation({
 }
 function setEventListener({
   formElement,
-  inputSelector,
+  inputList,
   submitButtonSelector,
   inactiveButtonClass,
   inputErrorClass,
   errorClass,
 }) {
-  const inputList = formElement.querySelectorAll(inputSelector);
-  const buttonElement = formElement.querySelector(submitButtonSelector)
-  toggleButtonState(inputList, buttonElement, inactiveButtonClass);
-  inputList.forEach((inputElement) => {
-    inputElement.addEventListener('input', ()=>{  
-      checkInputValidity(formElement, inputElement)
-      toggleButtonState(inputList, buttonElement, inactiveButtonClass)
+  const buttonElement = document.querySelector(submitButtonSelector)
+  inputList.forEach((inputElement)=>{
+    inputElement.addEventListener('input', ()=>{
+      toggleButtonState({inputList, inactiveButtonClass, buttonElement})
     })
-  });
+  })
 }
 
-function toggleButtonState(inputList, buttonElement, inactiveButtonClass) {
+function hasInvalidInput(inputList) {
+  return inputList.some((inputElement)=>{
+    return !inputElement.validity.valid
+  })
+}
+
+function toggleButtonState({inputList, inactiveButtonClass, buttonElement}){
   if(hasInvalidInput(inputList)) {
+    buttonElement.disabled = true
     buttonElement.classList.add(inactiveButtonClass)
-  }else {
+  } else {
+    buttonElement.disabled = false
     buttonElement.classList.remove(inactiveButtonClass)
   }
-}
-function checkInputValidity(formElement, inputElement) {
-  if(!inputElement.validity.valid) {
-    showInputError(formElement, inputElement)
-  } else {
-    hideInputError()
-  }
-}
-
-function hasInvalidInput(inputList) { 
-  // return inputList.some((inputElement) => {
-  //   return !inputElement.validity.valid;
-  // });
-}
-
-function hideInputError() {
-  return ''
-}
-
-function showInputError () {
-  return ''
 }
 
 function clearValidation() {

@@ -8,6 +8,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Mesto</title>
 </head>
+
 <body class="page">
   <div class="page__content">
     <header class="header page__section">
@@ -15,7 +16,7 @@
     </header>
     <main class="content">
       <section class="profile page__section">
-        <div class="profile__image" ></div>
+        <div class="profile__image"></div>
         <div class="profile__info">
           <h1 class="profile__title">Жак-Ив Кусто</h1>
           <button class="profile__edit-button" type="button"></button>
@@ -38,10 +39,11 @@
         <button type="button" class="popup__close"></button>
         <h3 class="popup__title">Редактировать профиль</h3>
         <form class="popup__form" name="edit-profile">
-          <input type="text" name="name" class="popup__input popup__input_type_name" placeholder="Имя" required>
+          <input type="text" name="name" class="popup__input popup__input_type_name" placeholder="Имя" required
+            minlength="2" novalidate>
           <span class="form__input-error name-input-error"></span>
           <input type="text" name="description" class="popup__input popup__input_type_description" placeholder="Занятие"
-            required>
+            required minlength="2" novalidate>
           <span class="form__input-error description-input-error"></span>
           <button type="submit" class="button popup__button">Сохранить</button>
         </form>
