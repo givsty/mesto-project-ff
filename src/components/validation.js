@@ -31,6 +31,7 @@ function setEventListener({
   inputList.forEach((inputElement)=>{
     inputElement.addEventListener('input', ()=>{
       toggleButtonState({inputList, inactiveButtonClass, buttonElement})
+      checkinputValidity({formElement, inputElement, inputErrorClass, errorClass})
     })
   })
 }
@@ -49,6 +50,21 @@ function toggleButtonState({inputList, inactiveButtonClass, buttonElement}){
     buttonElement.disabled = false
     buttonElement.classList.remove(inactiveButtonClass)
   }
+}
+
+function checkinputValidity({formElement, inputElement, inputErrorClass, errorClass}) {
+  if(!inputElement.validity.valid) {
+    showInputError(inputElement.validationMessage, inputErrorClass, errorClass)
+  } else {
+    hideInputError()
+  }
+}
+function showInputError(errorMessage, inputErrorClass, errorClass, inputElement) {
+  console.log(errorMessage);
+}
+
+function hideInputError() {
+  return ''
 }
 
 function clearValidation() {
