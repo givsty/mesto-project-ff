@@ -54,17 +54,20 @@ function toggleButtonState({inputList, inactiveButtonClass, buttonElement}){
 
 function checkinputValidity({formElement, inputElement, inputErrorClass, errorClass}) {
   if(!inputElement.validity.valid) {
-    showInputError(inputElement.validationMessage, inputErrorClass, errorClass)
+    showInputError(formElement, inputElement.validationMessage, inputErrorClass, errorClass, inputElement)
   } else {
-    hideInputError()
+    hideInputError(formElement, inputElement.validationMessage, inputErrorClass, errorClass, inputElement)
   }
 }
-function showInputError(errorMessage, inputErrorClass, errorClass, inputElement) {
-  console.log(errorMessage);
+
+function showInputError(formElement, errorMessage, inputErrorClass, errorClass, inputElement) {
+  const errorElement = formElement.querySelector(`.${inputElement.name}-input-error`)
+  errorElement.textContent = errorMessage
 }
 
-function hideInputError() {
-  return ''
+function hideInputError(formElement, errorMessage, inputErrorClass, errorClass, inputElement) {
+  const errorElement = formElement.querySelector(`.${inputElement.name}-input-error`)
+  errorElement.textContent = ''
 }
 
 function clearValidation() {
