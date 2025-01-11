@@ -27,7 +27,7 @@ function setEventListener({
   inputErrorClass,
   errorClass,
 }) {
-  const buttonElement = document.querySelector(submitButtonSelector)
+  const buttonElement = formElement.querySelector(submitButtonSelector)
   inputList.forEach((inputElement)=>{
     inputElement.addEventListener('input', ()=>{
       toggleButtonState({inputList, inactiveButtonClass, buttonElement})
@@ -56,17 +56,19 @@ function checkinputValidity({formElement, inputElement, inputErrorClass, errorCl
   if(!inputElement.validity.valid) {
     showInputError(formElement, inputElement.validationMessage, inputErrorClass, errorClass, inputElement)
   } else {
-    hideInputError(formElement, inputElement.validationMessage, inputErrorClass, errorClass, inputElement)
+    hideInputError(formElement, inputErrorClass, errorClass, inputElement)
   }
 }
 
 function showInputError(formElement, errorMessage, inputErrorClass, errorClass, inputElement) {
   const errorElement = formElement.querySelector(`.${inputElement.name}-input-error`)
+  inputElement.classList.add(inputErrorClass)
   errorElement.textContent = errorMessage
 }
 
-function hideInputError(formElement, errorMessage, inputErrorClass, errorClass, inputElement) {
+function hideInputError(formElement, inputErrorClass, errorClass, inputElement) {
   const errorElement = formElement.querySelector(`.${inputElement.name}-input-error`)
+  inputElement.classList.remove(inputErrorClass)
   errorElement.textContent = ''
 }
 
