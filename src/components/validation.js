@@ -28,6 +28,7 @@ function setEventListener({
   errorClass,
 }) {
   const buttonElement = formElement.querySelector(submitButtonSelector)
+  toggleButtonState({inputList, inactiveButtonClass, buttonElement})
   inputList.forEach((inputElement)=>{
     inputElement.addEventListener('input', ()=>{
       toggleButtonState({inputList, inactiveButtonClass, buttonElement})
