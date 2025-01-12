@@ -64,12 +64,14 @@ function checkinputValidity({formElement, inputElement, inputErrorClass, errorCl
 function showInputError(formElement, errorMessage, inputErrorClass, errorClass, inputElement) {
   const errorElement = formElement.querySelector(`.${inputElement.name}-input-error`)
   inputElement.classList.add(inputErrorClass)
+  errorElement.classList.add(errorClass)
   errorElement.textContent = errorMessage
 }
 
 function hideInputError(formElement, inputErrorClass, errorClass, inputElement) {
   const errorElement = formElement.querySelector(`.${inputElement.name}-input-error`)
   inputElement.classList.remove(inputErrorClass)
+  errorElement.classList.add(errorClass)
   errorElement.textContent = ''
 }
 
