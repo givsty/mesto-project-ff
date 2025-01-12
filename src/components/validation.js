@@ -76,7 +76,7 @@ function hideInputError(formElement, inputErrorClass, errorClass, inputElement) 
 }
 
 function clearValidation() {
-  return;
+  return '';
 }
 
 export { enableValidation, clearValidation };
