@@ -75,8 +75,17 @@ function hideInputError(formElement, inputErrorClass, errorClass, inputElement) 
   errorElement.textContent = ''
 }
 
-function clearValidation() {
-  return '';
+function clearValidation(formSelector, {
+  inputSelector,
+  submitButtonSelector,
+  inactiveButtonClass,
+  inputErrorClass,
+  errorClass,
+}) {
+  const inputList = Array.from(formSelector.querySelectorAll(inputSelector))
+  inputList.forEach((inputElement)=>{
+    console.log(inputElement)
+  })
 }
 
 export { enableValidation, clearValidation };
