@@ -54,6 +54,12 @@ function toggleButtonState({inputList, inactiveButtonClass, buttonElement}){
 }
 
 function checkinputValidity({formElement, inputElement, inputErrorClass, errorClass}) {
+  if(inputElement.validity.patternMismatch) {
+    inputElement.setCustomValidity(inputElement.dataset.errorMessage)
+  } else {
+    inputElement.setCustomValidity('')
+  }
+
   if(!inputElement.validity.valid) {
     showInputError(formElement, inputElement.validationMessage, inputErrorClass, errorClass, inputElement)
   } else {
@@ -84,7 +90,7 @@ function clearValidation(formSelector, {
 }) {
   const inputList = Array.from(formSelector.querySelectorAll(inputSelector))
   inputList.forEach((inputElement)=>{
-    console.log(inputElement)
+    inputElement
   })
 }
 
