@@ -40,10 +40,10 @@
         <h3 class="popup__title">Редактировать профиль</h3>
         <form class="popup__form" name="edit-profile">
           <input type="text" name="name" class="popup__input popup__input_type_name" placeholder="Имя" required
-            minlength="2" maxlength="40">
+            minlength="2" maxlength="40" pattern="^[a-zA-Zа-яА-ЯёЁ0-9\s\-]+$">
           <span class="form__input-error name-input-error"></span>
           <input type="text" name="description" class="popup__input popup__input_type_description" placeholder="Занятие"
-            required minlength="2" novalidate>
+            required minlength="2" novalidate maxlength="200">
           <span class="form__input-error description-input-error"></span>
           <button type="submit" class="button popup__button">Сохранить</button>
         </form>
