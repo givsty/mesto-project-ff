@@ -90,7 +90,9 @@ function clearValidation(formSelector, {
 }) {
   const inputList = Array.from(formSelector.querySelectorAll(inputSelector))
   inputList.forEach((inputElement)=>{
-    inputElement
+    inputElement.addEventListener('input', ()=>{
+      console.log('fasfafaf')
+    })
   })
 }
 
