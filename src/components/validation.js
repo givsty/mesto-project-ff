@@ -83,8 +83,6 @@ function hideInputError(formElement, inputErrorClass, errorClass, inputElement) 
 
 function clearValidation(formSelector, {
   inputSelector,
-  submitButtonSelector,
-  inactiveButtonClass,
   inputErrorClass,
   errorClass,
 }) {
