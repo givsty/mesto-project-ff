@@ -2,7 +2,7 @@
 const templateCards = document.querySelector('#card-template').content;
 
 //Функция создания карточки
-function createCard({name, link, deleteCard, likeCard, handleImageClick}) {
+function createCard({name, link, deleteCard, likeCard, handleImageClick, likes}) {
   const cardElement = templateCards
     .querySelector('.places__item')
     .cloneNode(true);
@@ -10,7 +10,7 @@ function createCard({name, link, deleteCard, likeCard, handleImageClick}) {
   const cardImage = cardElement.querySelector('.card__image');
   const deleteCardBtn = cardElement.querySelector('.card__delete-button');
   const cardLikeButton = cardElement.querySelector('.card__like-button')
-
+  const likesValue = cardElement.querySelector('.card__like-counter')
   deleteCardBtn.addEventListener('click', deleteCard);
 
   cardLikeButton.addEventListener('click', likeCard);
@@ -23,7 +23,13 @@ function createCard({name, link, deleteCard, likeCard, handleImageClick}) {
   cardName.textContent = name;
   cardImage.src = link;
   cardImage.alt = name;
+  likesValue.textContent = likes.length
 
+  // if(cardLikeButton.classList.contains('card__like-button_is-active')) {
+  //   likesValue.textContent += 1
+  // } else {
+  //   likesValue.textContent -= 1
+  // }
   return cardElement;
 }
 
