@@ -73,8 +73,9 @@ function handleProfileFormSubmit(event) {
 getInitialCards()
   .then((data)=>{
     Array.from(data).forEach((element)=>{
-      createCard(element)
+      renderCard(element, 'prepend')
     })
+    console.log(data)
   })
   .catch((error)=>{
     console.log(error)

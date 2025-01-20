@@ -12,7 +12,7 @@ export function getInitialCards() {
   })
   .then((result) => {
     if (result.ok) {
-      return result;
+      return result.json();
     } else {
       return Promise.reject(`Ошибка ${result.status}`);
     }
