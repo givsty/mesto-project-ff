@@ -5,22 +5,8 @@ import initialCards from './components/cards';
 import headerLogoImg from './images/logo.svg';
 import avatar from './images/avatar.jpg';
 import { clearValidation, enableValidation } from './components/validation';
-let cards;
-function search() {
-  return fetch('https://mesto.nomoreparties.co/cohort-mag-4/cards', {
-    headers: {
-      authorization: '561bff47-1094-4520-9c65-f40457c0b35c'
-    }
-  })
-    .then(res => res.json())
-    .catch((error)=>{
-      console.log(error)
-    })
-    .then((data) => {
-      return cards = Array.from(data)
-    });
-}
-console.log(cards)
+import { getInitialCards } from './components/api';
+
 //DOM узлы
 const addPlacesBtn = document.querySelector('.profile__add-button');
 const profileEditeBtn = document.querySelector('.profile__edit-button');
@@ -82,6 +68,17 @@ function handleProfileFormSubmit(event) {
   closeModal(popUpProfile);
   clearValidation(formProfile, validationConfig)
 }
+
+// Api
+getInitialCards()
+  .then((data)=>{
+    Array.from(data).forEach((element)=>{
+      createCard(element)
+    })
+  })
+  .catch((error)=>{
+    console.log(error)
+  })
 
 //Выбор метода
 function renderCard(element, method) {

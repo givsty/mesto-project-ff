@@ -1,21 +1,20 @@
-import { createCard } from "./card";
+const config = {
+  baseUrl: 'https://mesto.nomoreparties.co/cohort-mag-4/cards',
+  headers: {
+    authorization: '561bff47-1094-4520-9c65-f40457c0b35c',
+    'Content-Type': 'application/json',
+  },
+};
 
-function searchCard() {
-  fetch('https://mesto.nomoreparties.co/cohort-mag-4/cards', {
-    headers: {
-      authorization: '561bff47-1094-4520-9c65-f40457c0b35c'
+export function getInitialCards() {
+  return fetch(`${config.baseUrl}`, {
+    headers: config.headers,
+  })
+  .then((result) => {
+    if (result.ok) {
+      return result;
+    } else {
+      return Promise.reject(`Ошибка ${result.status}`);
     }
   })
 }
-
-function renderCard() {
-  searchCard()
-    .then(res => res.json())
-    .catch((error)=>{
-      console.log(error)
-    })
-    .then((data) => {
-      console.log(typeof data)
-    });
-}
-  
