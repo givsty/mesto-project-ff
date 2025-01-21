@@ -66,6 +66,20 @@
         </form>
       </div>
     </div>
+
+    <div class="popup popup_type_avatar">
+      <div class="popup__content">
+        <button type="button" class="popup__close"></button>
+        <h3 class="popup__title">Обновить аватар</h3>
+        <form class="popup__form" name="avatar">
+          <input type="url" name="link" class="popup__input popup__input_type_url" placeholder="Ссылка на картинку"
+          required novalidate type="url">
+          <span class="form__input-error link-input-error"></span>
+          <button type="submit" class="button popup__button">Сохранить</button>
+        </form>
+      </div>
+    </div>
+
     <div class="popup popup_type_image">
       <div class="popup__content popup__content_content_image">
         <button type="button" class="popup__close"></button>
@@ -85,7 +99,7 @@
         <!-- это временный костыль, надо перенести в css -->
         <div class="card__like__container" style="display: flex; flex-direction: column; align-items: center; justify-content: space-between;">
           <button type="button" class="card__like-button"></button>
-          <span class="card__like-counter">15000</span>
+          <span class="card__like-counter"></span>
         </div>
       </div>
     </li>

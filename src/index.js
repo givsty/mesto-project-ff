@@ -5,10 +5,11 @@ import initialCards from './components/cards';
 import headerLogoImg from './images/logo.svg';
 import avatar from './images/avatar.jpg';
 import { clearValidation, enableValidation } from './components/validation';
-import { getInitialCards } from './components/api';
+import { getInitialCards, config } from './components/api';
 
 //DOM узлы
 const addPlacesBtn = document.querySelector('.profile__add-button');
+const profileImage = document.querySelector('.profile__image')
 const profileEditeBtn = document.querySelector('.profile__edit-button');
 const places = document.querySelector('.places');
 const placesList = places.querySelector('.places__list');
@@ -28,6 +29,7 @@ const formCard = document.forms['new-place'];
 const profileTitle = document.querySelector('.profile__title');
 const profileDescriptions = document.querySelector('.profile__description');
 const popUpProfile = document.querySelector('.popup_type_edit');
+const popUpProfileImage = document.querySelector('.popup_type_avatar')
 const nameInput = popUpProfile.querySelector('.popup__input_type_name');
 const jobInput = popUpProfile.querySelector('.popup__input_type_description');
 
@@ -70,21 +72,22 @@ function handleProfileFormSubmit(event) {
 }
 
 // Api
-getInitialCards()
-  .then((data)=>{
-    Array.from(data).forEach((element)=>{
-      renderCard({
-        name: element.name,
-        link: element.link,
-        likeCard: likeCard,
-        handleImageClick: handleImageClick,
-        likes: element.likes,
-      }, 'prepend')
-    })
-  })
-  .catch((error)=>{
-    console.log(error)
-  })
+// getInitialCards()
+//   .then((data)=>{
+//     console.log(data)
+//     Array.from(data).forEach((element)=>{
+//       renderCard({
+//         name: element.name,
+//         link: element.link,
+//         likeCard: likeCard,
+//         handleImageClick: handleImageClick,
+//         likes: element.likes,
+//       }, 'prepend')
+//     })
+//   })
+//   .catch((error)=>{
+//     console.log(error)
+//   })
 
 //Выбор метода
 function renderCard(element, method) {
@@ -104,8 +107,10 @@ function renderPopupProfile() {
   jobInput.setAttribute('value', profileDescriptions.textContent);
   openModal(popUpProfile);
 }
-
-//Добавление карточки
+function renderPopupProfileImage() {
+  openModal(popUpProfileImage)
+}
+//Создание карточки
 function addNewCard(event) {
   renderCard(
     {
@@ -131,6 +136,7 @@ initialCards.forEach((element) => {
       deleteCard: deleteCard,
       likeCard: likeCard,
       handleImageClick: handleImageClick,
+      likes: [],
     },
     'append',
   );
@@ -146,7 +152,7 @@ addPlacesBtn.addEventListener('click', (event) => {
 
 //Событие открытия окна с профилем
 profileEditeBtn.addEventListener('click', renderPopupProfile);
-
+profileImage.addEventListener('click', renderPopupProfileImage)
 formProfile.addEventListener('submit', handleProfileFormSubmit);
 
 //Закрытие попапов

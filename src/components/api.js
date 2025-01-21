@@ -1,4 +1,4 @@
-const config = {
+export const config = {
   baseUrl: 'https://mesto.nomoreparties.co/cohort-mag-4/cards',
   headers: {
     authorization: '561bff47-1094-4520-9c65-f40457c0b35c',
