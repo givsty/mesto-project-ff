@@ -72,23 +72,23 @@ function handleProfileFormSubmit(event) {
 }
 
 // Api
-// getInitialCards()
-//   .then((data)=>{
-//     console.log(data)
-//     Array.from(data).forEach((element)=>{
-//       renderCard({
-//         name: element.name,
-//         link: element.link,
-//         likeCard: likeCard,
-//         handleImageClick: handleImageClick,
-//         likes: element.likes,
-//         deleteActive: false
-//       }, 'prepend')
-//     })
-//   })
-//   .catch((error)=>{
-//     console.log(error)
-//   })
+getInitialCards()
+  .then((data)=>{
+    console.log(data)
+    Array.from(data).forEach((element)=>{
+      renderCard({
+        name: element.name,
+        link: element.link,
+        likeCard: likeCard,
+        handleImageClick: handleImageClick,
+        likes: element.likes,
+        deleteActive: false
+      }, 'prepend')
+    })
+  })
+  .catch((error)=>{
+    console.log(error)
+  })
 
 //Выбор метода
 function renderCard(element, method) {

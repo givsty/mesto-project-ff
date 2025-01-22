@@ -18,3 +18,7 @@ export function getInitialCards() {
     }
   })
 }
+
+export function postLikeCard() {
+  return fetch(`${config.baseUrl}`)
+}

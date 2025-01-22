@@ -7,11 +7,20 @@
   background-size: cover;
   background-position: center;
   margin: 0 29px 0 0;
+  transition: 0.3s ease-out;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  z-index: 0;
 }
-
+.profile__image-edit-svg {
+  z-index: 1;
+}
 .profile__image:hover {
+  opacity: 0.5;
   cursor: pointer;
-  background-image: url('../../../images/icon-image.svg');
+  z-index: 1;
 }
 
 @media screen and (max-width: 740px) {
