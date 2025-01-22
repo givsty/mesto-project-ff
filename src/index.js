@@ -5,7 +5,7 @@ import initialCards from './components/cards';
 import headerLogoImg from './images/logo.svg';
 import avatar from './images/avatar.jpg';
 import { clearValidation, enableValidation } from './components/validation';
-import { getInitialCards, config } from './components/api';
+import { getInitialCards } from './components/api';
 
 //DOM узлы
 const addPlacesBtn = document.querySelector('.profile__add-button');
@@ -82,6 +82,7 @@ function handleProfileFormSubmit(event) {
 //         likeCard: likeCard,
 //         handleImageClick: handleImageClick,
 //         likes: element.likes,
+//         deleteActive: false
 //       }, 'prepend')
 //     })
 //   })
@@ -119,6 +120,8 @@ function addNewCard(event) {
       deleteCard: deleteCard,
       likeCard: likeCard,
       handleImageClick: handleImageClick,
+      likes: [],
+      deleteActive: true,
     },
     'prepend',
   );
@@ -136,6 +139,7 @@ initialCards.forEach((element) => {
       deleteCard: deleteCard,
       likeCard: likeCard,
       handleImageClick: handleImageClick,
+      deleteActive: false,
       likes: [],
     },
     'append',

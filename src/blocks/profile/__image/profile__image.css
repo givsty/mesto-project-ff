@@ -11,6 +11,7 @@
 
 .profile__image:hover {
   cursor: pointer;
+  background-image: url('../../../images/icon-image.svg');
 }
 
 @media screen and (max-width: 740px) {

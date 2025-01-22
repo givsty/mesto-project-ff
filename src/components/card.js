@@ -2,7 +2,7 @@
 const templateCards = document.querySelector('#card-template').content;
 
 //Функция создания карточки
-function createCard({name, link, deleteCard, likeCard, handleImageClick, likes}) {
+function createCard({name, link, deleteCard, likeCard, handleImageClick, likes, deleteActive}) {
   const cardElement = templateCards
     .querySelector('.places__item')
     .cloneNode(true);
@@ -25,6 +25,9 @@ function createCard({name, link, deleteCard, likeCard, handleImageClick, likes})
   cardImage.alt = name;
   likesValue.textContent = likes.length
 
+  if(!deleteActive) {
+    deleteCardBtn.remove()
+  }
   // if(cardLikeButton.classList.contains('card__like-button_is-active')) {
   //   likesValue.textContent += 1
   // } else {
