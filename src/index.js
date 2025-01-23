@@ -75,14 +75,14 @@ function handleProfileFormSubmit(event) {
 getInitialCards()
   .then((data)=>{
     Array.from(data).forEach((element)=>{
-      console.log(element._id)
+      console.log(element)
       renderCard({
         name: element.name,
         link: element.link,
         likeCard: likeCard,
         handleImageClick: handleImageClick,
         likes: element.likes,
-        deleteActive: false
+        deleteActive: fa
       }, 'prepend')
     })
   })

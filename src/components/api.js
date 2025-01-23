@@ -6,7 +6,7 @@ const config = {
   },
 };
 
-export function getInitialCards(renderCard) {
+export function getInitialCards() {
   return fetch(`${config.baseUrl}`, {
     headers: config.headers,
   })
@@ -19,11 +19,19 @@ export function getInitialCards(renderCard) {
   })
 }
 
-export function postInitialCards(renderCard) {
+export function postInitialCards() {
   return fetch(`${config.baseUrl}`, {
     headers: config.headers.authorization,
     method: 'POST',
-    body: JSON.stringify(renderCard),
+    body: JSON.stringify({
+      _id: config.authorization,
+      name: element.name,
+      link: element.link,
+      likeCard: likeCard,
+      handleImageClick: handleImageClick,
+      likes: element.likes,
+      deleteActive: false
+    }),
     headers: config.headers,
   })
   .then((result) => {
