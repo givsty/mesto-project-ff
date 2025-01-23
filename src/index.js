@@ -74,8 +74,8 @@ function handleProfileFormSubmit(event) {
 // Api
 getInitialCards()
   .then((data)=>{
-    console.log(data)
     Array.from(data).forEach((element)=>{
+      console.log(element._id)
       renderCard({
         name: element.name,
         link: element.link,
@@ -108,7 +108,8 @@ function renderPopupProfile() {
   jobInput.setAttribute('value', profileDescriptions.textContent);
   openModal(popUpProfile);
 }
-function renderPopupProfileImage() {
+function renderPopupProfileImage(event) {
+  event.preventDefault()
   openModal(popUpProfileImage)
 }
 //Создание карточки

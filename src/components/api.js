@@ -6,7 +6,7 @@ const config = {
   },
 };
 
-export function getInitialCards() {
+export function getInitialCards(renderCard) {
   return fetch(`${config.baseUrl}`, {
     headers: config.headers,
   })
@@ -19,6 +19,17 @@ export function getInitialCards() {
   })
 }
 
-export function postLikeCard() {
-  return fetch(`${config.baseUrl}`)
+export function postInitialCards(renderCard) {
+  return fetch(`${config.baseUrl}`, {
+    headers: config.headers.authorization,
+    method: 'POST',
+    body: JSON.stringify(renderCard),
+    headers: config.headers,
+  })
+  .then((result) => {
+    if(result.ok) {
+      result.JSON
+    }
+    return Promise.reject(`Ошибка ${result.status}`)
+  })
 }
