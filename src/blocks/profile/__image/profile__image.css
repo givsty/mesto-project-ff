@@ -12,7 +12,6 @@
   justify-content: center;
   align-items: center;
   position: relative;
-  z-index: 0;
 }
 
 .profile__image-edit-svg {
@@ -22,7 +21,6 @@
 .profile__image:hover {
   opacity: 0.5;
   cursor: pointer;
-  z-index: 1;
 }
 
 .profile__image:hover svg {
