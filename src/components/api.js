@@ -36,8 +36,24 @@ export function postInitialCards() {
   })
   .then((result) => {
     if(result.ok) {
-      result.JSON
+      result.json()
     }
     return Promise.reject(`Ошибка ${result.status}`)
   })
+}
+
+export function getProfileName() {
+  return fetch('', {
+    headers: config.headers.authorization
+  })
+    .then((result)=>{
+      if(result.ok) {
+        result.json()
+      }
+      return Promise.reject(`Ошбика ${result.status}`)
+    })
+}
+
+export function postProfileName() {
+  return fetch()
 }

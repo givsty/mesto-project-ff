@@ -14,14 +14,21 @@
   position: relative;
   z-index: 0;
 }
+
 .profile__image-edit-svg {
-  z-index: 1;
+  display: none;
 }
+
 .profile__image:hover {
   opacity: 0.5;
   cursor: pointer;
   z-index: 1;
 }
+
+.profile__image:hover svg {
+  display: block;
+  transition: 0.3s ease-out;
+} 
 
 @media screen and (max-width: 740px) {
   .profile__image {
