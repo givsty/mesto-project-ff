@@ -1,5 +1,5 @@
 const config = {
-  baseUrl: 'https://mesto.nomoreparties.co/cohort-mag-4/cards',
+  baseUrl: 'https://mesto.nomoreparties.co/cohort-mag-4',
   headers: {
     authorization: '561bff47-1094-4520-9c65-f40457c0b35c',
     'Content-Type': 'application/json',
@@ -7,7 +7,7 @@ const config = {
 };
 
 export function getInitialCards() {
-  return fetch(`${config.baseUrl}`, {
+  return fetch(`${config.baseUrl}/cards`, {
     headers: config.headers,
   })
   .then((result) => {
@@ -19,19 +19,14 @@ export function getInitialCards() {
   })
 }
 
-export function postInitialCard(post) {
+export function postInitialCard(cardElement) {
   return fetch(`${config.baseUrl}`, {
-    headers: config.headers.authorization,
+    headers: {
+      authorization: config.headers.authorization,
+      'Content-Type': 'application/json'
+    },
     method: 'POST',
-    body: JSON.stringify({
-      _id: config.authorization,
-      name: post.name,
-      link: post.link,
-      likeCard: likeCard,
-      handleImageClick: handleImageClick,
-      likes: post.likes,
-      deleteActive: false
-    }),
+    body: JSON.stringify(cardElement),
     headers: config.headers,
   })
   .then((result) => {
@@ -43,17 +38,41 @@ export function postInitialCard(post) {
 }
 
 export function getProfileName() {
-  return fetch('', {
-    headers: config.headers.authorization
+  return fetch(`${config.baseUrl}/users/me`, {
+    headers: {
+      authorization: config.headers.authorization,
+    },
+    method: 'GET'
   })
-    .then((result)=>{
-      if(result.ok) {
-        result.json()
-      }
-      return Promise.reject(`Ошбика ${result.status}`)
-    })
+  .then((result)=>{
+    if(result.ok) {
+      result.json()
+    }
+    return Promise.reject(`Ошибка ${result.status}`)
+  })
 }
 
-export function postProfileName() {
-  return fetch()
+export function patchProfileName(data) {
+  return fetch(`${config.baseUrl}`, {
+    headers: {
+      authorization: config.headers.authorization,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
+    method: 'PATCH' 
+  })
+  .then((result)=>{
+    if(result.ok) {
+      result.json()
+    }
+    return Promise.reject(`Ошиька ${result.status}`)
+  })
+}
+
+export function getLikes() {
+  return fetch(`${config.baseUrl}`)
+}
+
+export function postLikes() {
+  return fetch(`${config.baseUrl}`)
 }

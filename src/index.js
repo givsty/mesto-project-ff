@@ -5,7 +5,7 @@ import initialCards from './components/cards';
 import headerLogoImg from './images/logo.svg';
 import avatar from './images/avatar.jpg';
 import { clearValidation, enableValidation } from './components/validation';
-import { getInitialCards, postInitialCard} from './components/api';
+import { getInitialCards, getProfileName, patchProfileName, postInitialCard} from './components/api';
 
 //DOM узлы
 const addPlacesBtn = document.querySelector('.profile__add-button');
@@ -65,9 +65,15 @@ enableValidation(validationConfig);
 //Функция открытия модального окна профиля
 function handleProfileFormSubmit(event) {
   event.preventDefault();
+  patchProfileName()
+    .then((data)=>{
+      patchProfileName()
+    })
+    .catch((error)=>{
+      console.log(error)
+    })
   profileTitle.textContent = nameInput.value;
   profileDescriptions.textContent = jobInput.value;
-  postInitialCards()
   closeModal(popUpProfile);
   clearValidation(formProfile, validationConfig)
 }
@@ -117,7 +123,10 @@ function renderPopupProfileImage(event) {
 function addNewCard(event) {
   postInitialCard()
     .then((post)=>{
-      postInitialCard(post)
+      postInitialCard({
+        name: popUpFormNameValueCard.value, 
+        link: popUpFormLinkValueCard.value, 
+      })
     })
   clearValidation(formCard, validationConfig)
   closeModal(popUpElementCard);
