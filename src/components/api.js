@@ -19,17 +19,17 @@ export function getInitialCards() {
   })
 }
 
-export function postInitialCards() {
+export function postInitialCard(post) {
   return fetch(`${config.baseUrl}`, {
     headers: config.headers.authorization,
     method: 'POST',
     body: JSON.stringify({
       _id: config.authorization,
-      name: element.name,
-      link: element.link,
+      name: post.name,
+      link: post.link,
       likeCard: likeCard,
       handleImageClick: handleImageClick,
-      likes: element.likes,
+      likes: post.likes,
       deleteActive: false
     }),
     headers: config.headers,

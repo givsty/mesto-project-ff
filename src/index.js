@@ -5,7 +5,7 @@ import initialCards from './components/cards';
 import headerLogoImg from './images/logo.svg';
 import avatar from './images/avatar.jpg';
 import { clearValidation, enableValidation } from './components/validation';
-import { getInitialCards } from './components/api';
+import { getInitialCards, postInitialCard} from './components/api';
 
 //DOM узлы
 const addPlacesBtn = document.querySelector('.profile__add-button');
@@ -67,6 +67,7 @@ function handleProfileFormSubmit(event) {
   event.preventDefault();
   profileTitle.textContent = nameInput.value;
   profileDescriptions.textContent = jobInput.value;
+  postInitialCards()
   closeModal(popUpProfile);
   clearValidation(formProfile, validationConfig)
 }
@@ -114,18 +115,10 @@ function renderPopupProfileImage(event) {
 }
 //Создание карточки
 function addNewCard(event) {
-  renderCard(
-    {
-      name: popUpFormNameValueCard.value,
-      link: popUpFormLinkValueCard.value,
-      deleteCard: deleteCard,
-      likeCard: likeCard,
-      handleImageClick: handleImageClick,
-      likes: [],
-      deleteActive: true,
-    },
-    'prepend',
-  );
+  postInitialCard()
+    .then((post)=>{
+      postInitialCard(post)
+    })
   clearValidation(formCard, validationConfig)
   closeModal(popUpElementCard);
   event.preventDefault();
