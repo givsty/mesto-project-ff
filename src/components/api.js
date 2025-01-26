@@ -58,7 +58,8 @@ export function patchProfileName(data) {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      avatar: avatarLink
+      name: data.name,
+      about: data.about
     })
   })
   .then((result)=>{

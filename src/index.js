@@ -69,20 +69,20 @@ function handleProfileFormSubmit(event) {
   const profile = {
     name: nameInput.value,
     about: jobInput.value,
-    _id: f87cc046b58a155a69a0b23e,
   }
   patchProfileName(profile)
     .then((data)=>{
-      console.log(data)
+      profileTitle.textContent = data.value;
+      profileDescriptions.textContent = data.value;
     })
     .catch((err)=>{
       console.log(err)
     }) 
-  profileTitle.textContent = nameInput.value;
-  profileDescriptions.textContent = jobInput.value;
+    .then(()=>{
+      closeModal(popUpProfile);
+      clearValidation(formProfile, validationConfig)
+    })
   event.preventDefault();
-  closeModal(popUpProfile);
-  clearValidation(formProfile, validationConfig)
 }
 
 // Api
