@@ -52,16 +52,18 @@ export function getProfileName() {
 
 export function patchProfileName(data) {
   return fetch(`${config.baseUrl}/users/me`, {
+    method: 'PATCH',
     headers: {
       authorization: config.headers.authorization,
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify(data),
-    method: 'PATCH' 
+    body: JSON.stringify({
+      avatar: avatarLink
+    })
   })
   .then((result)=>{
     if(result.ok) {
-      result.json()
+      return result.json()
     }
     return Promise.reject(`Ошибка ${result.status}`)
   })
@@ -73,6 +75,25 @@ export function getLikes() {
 
 export function postLikes() {
   return fetch(`${config.baseUrl}`)
+}
+
+export function postAvatarImage(image) {
+  return fetch(`${config.baseUrl}/users/me/avatar`, {
+    headers: {
+      authorization: config.headers.authorization,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      avatar: image
+    }),
+    method: 'PATCH'
+  })
+  .then((result)=>{
+    if(result.ok) {
+      return result.json()
+    }
+    return Promise.reject(`Ошибка ${result.status}`)
+  })
 }
 
 getProfileName()

@@ -5,7 +5,7 @@ import initialCards from './components/cards';
 import headerLogoImg from './images/logo.svg';
 import avatar from './images/avatar.jpg';
 import { clearValidation, enableValidation } from './components/validation';
-import { getInitialCards, getProfileName, patchProfileName, postInitialCard} from './components/api';
+import { getInitialCards, getProfileName, patchProfileName, postAvatarImage, postInitialCard} from './components/api';
 
 //DOM узлы
 const addPlacesBtn = document.querySelector('.profile__add-button');
@@ -17,9 +17,6 @@ const popups = document.querySelectorAll('.popup');
 
 //Header
 const headerLogo = document.querySelector('.header__logo');
-
-//Section profile
-const headerProfile = document.querySelector('.profile__image');
 
 //Common forms
 const formProfile = document.forms['edit-profile'];
@@ -42,14 +39,17 @@ const popUpFormNameValueCard = formCard.querySelector(
 );
 const popUpFormLinkValueCard = formCard.querySelector('.popup__input_type_url');
 
-// //PopUpImg Доделать
+//PopUpImg
 const popUpElementImg = document.querySelector('.popup_type_image');
 const popUpImg = popUpElementImg.querySelector('.popup__image');
 const popUpDescriptions = popUpElementImg.querySelector('.popup__caption');
 
+//Popup Avatar
+const popupAvatarInput = formAvatar.querySelector('.popup__input_type_url')
+
 //Добавление картинок
 headerLogo.src = headerLogoImg;
-headerProfile.style.backgroundImage = `url('${avatar}')`;
+profileImage.style.backgroundImage = `url('${avatar}')`;
 
 //Набор конфига валидации
 const validationConfig = {
@@ -123,9 +123,24 @@ function renderPopupProfile() {
   openModal(popUpProfile);
 }
 
-function renderPopupProfileImage(event) {
+function renderPopupAvatar(event) {
   event.preventDefault()
   openModal(popUpProfileImage)
+}
+
+function addProfileAvatar(event) {
+  event.preventDefault()
+  postAvatarImage(popupAvatarInput.value)
+    .then((result)=>{
+      profileImage.style.backgroundImage = `url('${result.avatar}')`;
+    })
+    .catch((error)=>{
+      console.log(error)
+    })
+    .then(()=>{
+      closeModal(popUpProfileImage)
+    })
+  event.preventDefault()
 }
 
 //Создание карточки
@@ -190,9 +205,9 @@ addPlacesBtn.addEventListener('click', (event) => {
 
 //Событие открытия окна с профилем
 profileEditeBtn.addEventListener('click', renderPopupProfile);
-profileImage.addEventListener('click', renderPopupProfileImage)
+profileImage.addEventListener('click', renderPopupAvatar)
 formProfile.addEventListener('submit', handleProfileFormSubmit);
-// formAvatar.addEventListener('submit', )
+formAvatar.addEventListener('submit', addProfileAvatar)
 
 //Закрытие попапов
 popups.forEach((popup) => {
