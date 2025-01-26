@@ -20,7 +20,7 @@ export function getInitialCards() {
 }
 
 export function postInitialCard(cardElement) {
-  return fetch(`${config.baseUrl}`, {
+  return fetch(`${config.baseUrl}/cards`, {
     headers: {
       authorization: config.headers.authorization,
       'Content-Type': 'application/json'
@@ -31,7 +31,7 @@ export function postInitialCard(cardElement) {
   })
   .then((result) => {
     if(result.ok) {
-      result.json()
+      return result.json()
     }
     return Promise.reject(`Ошибка ${result.status}`)
   })
@@ -41,19 +41,17 @@ export function getProfileName() {
   return fetch(`${config.baseUrl}/users/me`, {
     headers: {
       authorization: config.headers.authorization,
+      'Content-Type': 'application/json',
     },
     method: 'GET'
   })
   .then((result)=>{
-    if(result.ok) {
-      result.json()
-    }
-    return Promise.reject(`Ошибка ${result.status}`)
+    return result.json()
   })
 }
 
 export function patchProfileName(data) {
-  return fetch(`${config.baseUrl}`, {
+  return fetch(`${config.baseUrl}/users/me`, {
     headers: {
       authorization: config.headers.authorization,
       'Content-Type': 'application/json',
@@ -65,7 +63,7 @@ export function patchProfileName(data) {
     if(result.ok) {
       result.json()
     }
-    return Promise.reject(`Ошиька ${result.status}`)
+    return Promise.reject(`Ошибка ${result.status}`)
   })
 }
 
@@ -76,3 +74,11 @@ export function getLikes() {
 export function postLikes() {
   return fetch(`${config.baseUrl}`)
 }
+
+getProfileName()
+  .then((data)=>{
+    console.log(data)
+  })
+  .catch((err)=>{
+    console.log(err)
+  })

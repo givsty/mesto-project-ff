@@ -24,7 +24,9 @@ const headerProfile = document.querySelector('.profile__image');
 //Common forms
 const formProfile = document.forms['edit-profile'];
 const formCard = document.forms['new-place'];
+const formAvatar = document.forms['avatar'];
 
+console.log(formAvatar)
 //Popup profile
 const profileTitle = document.querySelector('.profile__title');
 const profileDescriptions = document.querySelector('.profile__description');
@@ -64,38 +66,43 @@ enableValidation(validationConfig);
 
 //Функция открытия модального окна профиля
 function handleProfileFormSubmit(event) {
-  event.preventDefault();
-  patchProfileName()
+  const profile = {
+    name: nameInput.value,
+    about: jobInput.value,
+    _id: f87cc046b58a155a69a0b23e,
+  }
+  patchProfileName(profile)
     .then((data)=>{
-      patchProfileName()
+      console.log(data)
     })
-    .catch((error)=>{
-      console.log(error)
-    })
+    .catch((err)=>{
+      console.log(err)
+    }) 
   profileTitle.textContent = nameInput.value;
   profileDescriptions.textContent = jobInput.value;
+  event.preventDefault();
   closeModal(popUpProfile);
   clearValidation(formProfile, validationConfig)
 }
 
 // Api
-getInitialCards()
-  .then((data)=>{
-    console.log(data)
-    Array.from(data).forEach((element)=>{
-      renderCard({
-        name: element.name,
-        link: element.link,
-        likeCard: likeCard,
-        handleImageClick: handleImageClick,
-        likes: element.likes,
-        deleteActive: false,
-      }, 'prepend')
-    })
-  })
-  .catch((error)=>{
-    console.log(error)
-  })
+// getInitialCards()
+//   .then((data)=>{
+//     console.log(data)
+//     Array.from(data).forEach((element)=>{
+//       renderCard({
+//         name: element.name,
+//         link: element.link,
+//         likeCard: likeCard,
+//         handleImageClick: handleImageClick,
+//         likes: element.likes,
+//         deleteActive: false,
+//       }, 'prepend')
+//     })
+//   })
+//   .catch((error)=>{
+//     console.log(error)
+//   })
 
 //Выбор метода
 function renderCard(element, method) {
@@ -115,19 +122,43 @@ function renderPopupProfile() {
   jobInput.setAttribute('value', profileDescriptions.textContent);
   openModal(popUpProfile);
 }
+
 function renderPopupProfileImage(event) {
   event.preventDefault()
   openModal(popUpProfileImage)
 }
+
 //Создание карточки
 function addNewCard(event) {
-  postInitialCard()
-    .then((post)=>{
-      postInitialCard({
-        name: popUpFormNameValueCard.value, 
-        link: popUpFormLinkValueCard.value, 
-      })
-    })
+  renderCard( 
+    { 
+      name: popUpFormNameValueCard.value, 
+      link: popUpFormLinkValueCard.value, 
+      deleteCard: deleteCard, 
+      likeCard: likeCard, 
+      handleImageClick: handleImageClick,
+      likes: []
+    }, 
+    'prepend', 
+  )
+  // card = {
+  //   name: popUpFormNameValueCard.value,
+  //   link: popUpFormLinkValueCard.value,
+  // }
+  // postInitialCard(card)
+  //   .then((post)=>{
+  //     console.log(post)
+  //     post.userId = userid
+  //     renderCard( 
+  //       {  
+  //         deleteCard: deleteCard, 
+  //         likeCard: likeCard, 
+  //         handleImageClick: handleImageClick,
+  //         likes: []
+  //       }, 
+  //       'prepend', 
+  //     )
+  //   })
   clearValidation(formCard, validationConfig)
   closeModal(popUpElementCard);
   event.preventDefault();
@@ -161,6 +192,7 @@ addPlacesBtn.addEventListener('click', (event) => {
 profileEditeBtn.addEventListener('click', renderPopupProfile);
 profileImage.addEventListener('click', renderPopupProfileImage)
 formProfile.addEventListener('submit', handleProfileFormSubmit);
+// formAvatar.addEventListener('submit', )
 
 //Закрытие попапов
 popups.forEach((popup) => {
