@@ -88,6 +88,7 @@ function handleProfileFormSubmit(event) {
   event.preventDefault();
 }
 
+// Получение карточек
 getInitialCards()
   .then((data) => {
     console.log(data);
@@ -109,7 +110,8 @@ getInitialCards()
   .catch((error) => {
     console.log(error);
   });
-
+  
+//Получение данных профиля
 getProfileName()
   .then((data) => {
     console.log(data._id);

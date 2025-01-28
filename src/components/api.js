@@ -126,3 +126,24 @@ export function postAvatarImage(image) {
     return Promise.reject(`Ошибка ${result.status}`);
   });
 }
+
+export function deleteInitialCard(cardElement) {
+  return fetch(`${config.baseUrl}/cards`, {
+    headers: {
+      authorization: config.headers.authorization,
+      "Content-Type": "application/json",
+    },
+    method: "PUT",
+    body: JSON.stringify({
+      name: cardElement.name,
+      link: cardElement.link,
+      _id: cardElement._id,
+    }),
+    headers: config.headers,
+  }).then((result) => {
+    if (result.ok) {
+      return result.json();
+    }
+    return Promise.reject(`Ошибка ${result.status}`);
+  });
+}
