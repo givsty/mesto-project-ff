@@ -96,11 +96,3 @@ export function postAvatarImage(image) {
     return Promise.reject(`Ошибка ${result.status}`)
   })
 }
-
-getProfileName()
-  .then((data)=>{
-    console.log(data)
-  })
-  .catch((err)=>{
-    console.log(err)
-  })

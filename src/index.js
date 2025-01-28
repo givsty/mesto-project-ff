@@ -3,7 +3,6 @@ import { openModal, closeModal } from './components/modal';
 import './pages/index.css';
 import initialCards from './components/cards';
 import headerLogoImg from './images/logo.svg';
-import avatar from './images/avatar.jpg';
 import { clearValidation, enableValidation } from './components/validation';
 import { getInitialCards, getProfileName, patchProfileName, postAvatarImage, postInitialCard} from './components/api';
 
@@ -49,7 +48,6 @@ const popupAvatarInput = formAvatar.querySelector('.popup__input_type_url')
 
 //Добавление картинок
 headerLogo.src = headerLogoImg;
-profileImage.style.backgroundImage = `url('${avatar}')`;
 
 //Набор конфига валидации
 const validationConfig = {
@@ -72,8 +70,9 @@ function handleProfileFormSubmit(event) {
   }
   patchProfileName(profile)
     .then((data)=>{
-      profileTitle.textContent = data.value;
-      profileDescriptions.textContent = data.value;
+      console.log(data)
+      profileTitle.textContent = data.name;
+      profileDescriptions.textContent = data.about;
     })
     .catch((err)=>{
       console.log(err)
@@ -85,24 +84,36 @@ function handleProfileFormSubmit(event) {
   event.preventDefault();
 }
 
-// Api
-// getInitialCards()
-//   .then((data)=>{
-//     console.log(data)
-//     Array.from(data).forEach((element)=>{
-//       renderCard({
-//         name: element.name,
-//         link: element.link,
-//         likeCard: likeCard,
-//         handleImageClick: handleImageClick,
-//         likes: element.likes,
-//         deleteActive: false,
-//       }, 'prepend')
-//     })
-//   })
-//   .catch((error)=>{
-//     console.log(error)
-//   })
+getInitialCards()
+  .then((data)=>{
+    console.log(data)
+    Array.from(data).forEach((element)=>{
+      renderCard({
+        name: element.name,
+        link: element.link,
+        likeCard: likeCard,
+        handleImageClick: handleImageClick,
+        likes: element.likes,
+        deleteActive: false,
+      }, 'prepend')
+    })
+  })
+  .catch((error)=>{
+    console.log(error)
+  })
+
+getProfileName()
+  .then((data)=>{
+    profileTitle.textContent = data.name
+    profileDescriptions.textContent = data.about
+    profileImage.style.backgroundImage = `url('${data.avatar}')`;
+  })
+  .catch((err)=>{
+    console.log(err)
+  })
+  .finally(()=>{
+
+  })
 
 //Выбор метода
 function renderCard(element, method) {
@@ -118,8 +129,16 @@ function handleImageClick(name, link) {
 }
 
 function renderPopupProfile() {
-  nameInput.setAttribute('value', profileTitle.textContent);
-  jobInput.setAttribute('value', profileDescriptions.textContent);
+  getProfileName()
+  .then((data)=>{
+    const name = data.name
+    const job = data.about
+    nameInput.setAttribute('value', name);
+    jobInput.setAttribute('value', job);
+  })
+  .catch((err)=>{
+    console.log(err)
+  })
   openModal(popUpProfile);
 }
 
@@ -131,8 +150,8 @@ function renderPopupAvatar(event) {
 function addProfileAvatar(event) {
   event.preventDefault()
   postAvatarImage(popupAvatarInput.value)
-    .then((result)=>{
-      profileImage.style.backgroundImage = `url('${result.avatar}')`;
+    .then((data)=>{
+      profileImage.style.backgroundImage = `url('${data.avatar}')`;
     })
     .catch((error)=>{
       console.log(error)
