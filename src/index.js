@@ -9,8 +9,8 @@ import {
   patchProfileName,
   postAvatarImage,
   postInitialCard,
+  putLikes,
 } from "./components/api";
-
 //DOM узлы
 const addPlacesBtn = document.querySelector(".profile__add-button");
 const profileImage = document.querySelector(".profile__image");
@@ -100,6 +100,7 @@ getInitialCards()
           handleImageClick: handleImageClick,
           likes: element.likes,
           deleteActive: false,
+          _id: element._id,
         },
         "prepend"
       );

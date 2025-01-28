@@ -1,3 +1,5 @@
+import { deleteInitialCard } from "./api";
+
 //Темплейт карточки
 const templateCards = document.querySelector("#card-template").content;
 //Функция создания карточки
@@ -27,7 +29,8 @@ function createCard({
   cardImage.addEventListener("click", () => {
     handleImageClick(name, link);
   });
-  if (!deleteActive) {
+  if (!_id === 'f87cc046b58a155a69a0b23e') {
+    console.log('правда')
     deleteCardBtn.remove();
   }
   cardName.textContent = name;

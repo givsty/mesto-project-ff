@@ -70,13 +70,24 @@ export function patchProfileName(data) {
   });
 }
 
-export function getLikes() {
-  return fetch(`${config.baseUrl}`).then((result) => {
-    if (result.ok) {
-      return result.json();
+export function putLikes(data) {
+  return fetch(`${config.baseUrl}/likes/f87cc046b58a155a69a0b23e`, {
+    method: "PUT",
+    headers: {
+      authorization: config.headers.authorization,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      likes: data.likes
+    })
+  }).then(
+    (result) => {
+      if (result.ok) {
+        return result.json();
+      }
+      Promise.reject(`Ошибка ${result.status}`);
     }
-    Promise.reject(`Ошибка ${result.status}`);
-  });
+  );
 }
 
 export function postLikes() {
