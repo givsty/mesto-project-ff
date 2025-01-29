@@ -127,19 +127,13 @@ export function postAvatarImage(image) {
   });
 }
 
-export function deleteInitialCard(cardElement) {
-  return fetch(`${config.baseUrl}/cards`, {
+export function deleteInitialCard(id) {
+  return fetch(`${config.baseUrl}/cards/${id}`, {
     headers: {
       authorization: config.headers.authorization,
       "Content-Type": "application/json",
     },
-    method: "PUT",
-    body: JSON.stringify({
-      name: cardElement.name,
-      link: cardElement.link,
-      _id: cardElement._id,
-    }),
-    headers: config.headers,
+    method: "DELETE",
   }).then((result) => {
     if (result.ok) {
       return result.json();

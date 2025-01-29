@@ -98,6 +98,7 @@ getInitialCards()
           name: element.name,
           link: element.link,
           likeCard: likeCard,
+          deleteCard: deleteCard,
           handleImageClick: handleImageClick,
           likes: element.likes,
           deleteActive: false,
@@ -110,7 +111,7 @@ getInitialCards()
   .catch((error) => {
     console.log(error);
   });
-  
+
 //Получение данных профиля
 getProfileName()
   .then((data) => {

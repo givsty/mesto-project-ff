@@ -21,8 +21,9 @@ function createCard({
   const deleteCardBtn = cardElement.querySelector(".card__delete-button");
   const cardLikeButton = cardElement.querySelector(".card__like-button");
   const likesValue = cardElement.querySelector(".card__like-counter");
-  deleteCardBtn.addEventListener("click", deleteCard);
-
+  deleteCardBtn.addEventListener("click", (event)=>{
+    deleteCard(event, _id)
+  });
   cardLikeButton.addEventListener("click", likeCard);
 
   //Открытие модального окна у изображения, находящегося в карточке
@@ -30,7 +31,7 @@ function createCard({
     handleImageClick(name, link);
   });
   if (!_id === 'f87cc046b58a155a69a0b23e') {
-    console.log('правда')
+    console.log(_id)
     deleteCardBtn.remove();
   }
   cardName.textContent = name;
@@ -41,7 +42,15 @@ function createCard({
 }
 
 //Функция удаления карточки
-function deleteCard(event) {
+function deleteCard(event, _id) {
+  deleteInitialCard(_id)
+    .then((result)=>{
+      console.log(result)
+      event.target.closest(".places__item").remove();
+    })
+    .catch((error)=>{
+      console.log(error)
+    })
   event.target.closest(".places__item").remove();
 }
 
