@@ -1,4 +1,4 @@
-import { deleteInitialCard, putLikes } from "./api";
+import { deleteInitialCard, deletLikes, putLikes } from "./api";
 
 //Темплейт карточки
 const templateCards = document.querySelector("#card-template").content;
@@ -25,9 +25,14 @@ function createCard({
   deleteCardBtn.addEventListener("click", (event)=>{
     deleteCard(event, _id)
   });
-  cardLikeButton.addEventListener("click", (event)=>{
-    likeCard(event, _id)
+
+  cardLikeButton.addEventListener("click", (event) => {
+    likeCard(event, _id, {
+      likesValue,
+      likes,  
+    })
   });
+
   //Открытие модального окна у изображения, находящегося в карточке
   cardImage.addEventListener("click", () => {
     handleImageClick(name, link);
@@ -58,14 +63,25 @@ function deleteCard(event, _id) {
 }
 
 //Функция лайка карточки
-function likeCard(event, _id) {
+function likeCard(event, _id, {likes, likesValue}) {
   putLikes(_id)
     .then(()=>{
-      event.target.classList.toggle("card__like-button_is-active");
+      likesValue.textContent = likes.length + 1
+      event.target.classList.add("card__like-button_is-active");
     })
     .catch((error)=>{
       console.log(error)
     })
 }
 
+function deleteLikeCard(event, _id, {likes, likesValue}) {
+  deletLikes(_id)
+  .then(()=>{
+    likesValue.textContent = likes.length - 1
+    event.target.classList.remove("card__like-button_is-active");
+  })
+  .catch((error)=>{
+    console.log(error)
+  })
+}
 export { createCard, deleteCard, likeCard };

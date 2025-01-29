@@ -71,7 +71,6 @@ export function patchProfileName(data) {
 }
 
 export function putLikes(_id) {
-  console.log(`${config.baseUrl}/cards/likes/${_id}`);
   return fetch(`${config.baseUrl}/cards/likes/${_id}`, {
     method: "PUT",
     headers: {
@@ -85,8 +84,8 @@ export function putLikes(_id) {
   });
 }
 
-export function deletLikes() {
-  return fetch(`${config.baseUrl}`, {
+export function deletLikes(_id) {
+  return fetch(`${config.baseUrl}/cards/likes/${_id}`, {
     method: "DELETE",
     headers: {
       authorization: config.headers.authorization,

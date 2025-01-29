@@ -92,7 +92,6 @@ function handleProfileFormSubmit(event) {
 getInitialCards()
   .then((data) => {
     Array.from(data).forEach((element) => {
-      console.log(element)
       renderCard(
         {
           name: element.name,
@@ -228,11 +227,3 @@ popups.forEach((popup) => {
     }
   });
 });
-
-getProfileName()
-  .then((data) => {
-    console.log(data)
-  })
-  .catch((err) => {
-    console.log(err);
-  });
