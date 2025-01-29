@@ -1,5 +1,5 @@
 const config = {
-  baseUrl: "https://mesto.nomoreparties.co/cohort-mag-4",
+  baseUrl: "https://mesto.nomoreparties.co/v1/cohort-mag-4",
   headers: {
     authorization: "561bff47-1094-4520-9c65-f40457c0b35c",
     "Content-Type": "application/json",
@@ -28,7 +28,7 @@ export function postInitialCard(cardElement) {
     body: JSON.stringify({
       name: cardElement.name,
       link: cardElement.link,
-      _id: cardElement._id, 
+      _id: cardElement._id,
     }),
     headers: config.headers,
   }).then((result) => {
@@ -71,19 +71,18 @@ export function patchProfileName(data) {
 }
 
 export function putLikes(_id) {
+  console.log(`${config.baseUrl}/cards/likes/${_id}`);
   return fetch(`${config.baseUrl}/cards/likes/${_id}`, {
     method: "PUT",
     headers: {
       authorization: config.headers.authorization,
     },
-  }).then(
-    (result) => {
-      if (result.ok) {
-        return result.json();
-      }
-      Promise.reject(`Ошибка ${result.status}`);
+  }).then((result) => {
+    if (result.ok) {
+      return result.json();
     }
-  );
+    return Promise.reject(`Ошибка ${result.status}`);
+  });
 }
 
 export function deletLikes() {
