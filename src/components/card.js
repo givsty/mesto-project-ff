@@ -1,4 +1,4 @@
-import { deleteInitialCard } from "./api";
+import { deleteInitialCard, putLikes } from "./api";
 
 //Темплейт карточки
 const templateCards = document.querySelector("#card-template").content;
@@ -10,8 +10,8 @@ function createCard({
   likeCard,
   handleImageClick,
   likes,
-  deleteActive,
   _id,
+  profile_id,
 }) {
   const cardElement = templateCards
     .querySelector(".places__item")
@@ -21,19 +21,22 @@ function createCard({
   const deleteCardBtn = cardElement.querySelector(".card__delete-button");
   const cardLikeButton = cardElement.querySelector(".card__like-button");
   const likesValue = cardElement.querySelector(".card__like-counter");
+
   deleteCardBtn.addEventListener("click", (event)=>{
     deleteCard(event, _id)
   });
-  cardLikeButton.addEventListener("click", likeCard);
-
+  cardLikeButton.addEventListener("click", (event)=>{
+    likeCard(event, _id)
+  });
   //Открытие модального окна у изображения, находящегося в карточке
   cardImage.addEventListener("click", () => {
     handleImageClick(name, link);
   });
-  if (!_id === 'f87cc046b58a155a69a0b23e') {
-    console.log(_id)
+
+  if (!(profile_id === 'f87cc046b58a155a69a0b23e')) {
     deleteCardBtn.remove();
   }
+
   cardName.textContent = name;
   cardImage.src = link;
   cardImage.alt = name;
@@ -55,8 +58,14 @@ function deleteCard(event, _id) {
 }
 
 //Функция лайка карточки
-function likeCard(event) {
-  event.target.classList.toggle("card__like-button_is-active");
+function likeCard(event, _id) {
+  putLikes(_id)
+    .then(()=>{
+      event.target.classList.toggle("card__like-button_is-active");
+    })
+    .catch((error)=>{
+      console.log(error)
+    })
 }
 
 export { createCard, deleteCard, likeCard };

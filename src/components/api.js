@@ -28,7 +28,7 @@ export function postInitialCard(cardElement) {
     body: JSON.stringify({
       name: cardElement.name,
       link: cardElement.link,
-      _id: cardElement._id,
+      _id: cardElement._id, 
     }),
     headers: config.headers,
   }).then((result) => {
@@ -70,16 +70,12 @@ export function patchProfileName(data) {
   });
 }
 
-export function putLikes(data) {
-  return fetch(`${config.baseUrl}/likes/f87cc046b58a155a69a0b23e`, {
+export function putLikes(_id) {
+  return fetch(`${config.baseUrl}/cards/likes/${_id}`, {
     method: "PUT",
     headers: {
       authorization: config.headers.authorization,
-      "Content-Type": "application/json",
     },
-    body: JSON.stringify({
-      likes: data.likes
-    })
   }).then(
     (result) => {
       if (result.ok) {
@@ -90,17 +86,13 @@ export function putLikes(data) {
   );
 }
 
-export function postLikes() {
+export function deletLikes() {
   return fetch(`${config.baseUrl}`, {
-    method: "POST",
+    method: "DELETE",
     headers: {
       authorization: config.headers.authorization,
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({
-      name: data.name,
-      about: data.about,
-    }),
   }).then((result) => {
     if (result.ok) {
       return result.json();

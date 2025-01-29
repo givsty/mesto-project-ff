@@ -91,8 +91,8 @@ function handleProfileFormSubmit(event) {
 // Получение карточек
 getInitialCards()
   .then((data) => {
-    console.log(data);
     Array.from(data).forEach((element) => {
+      console.log(element)
       renderCard(
         {
           name: element.name,
@@ -101,8 +101,8 @@ getInitialCards()
           deleteCard: deleteCard,
           handleImageClick: handleImageClick,
           likes: element.likes,
-          deleteActive: false,
           _id: element._id,
+          profile_id: element.owner._id
         },
         "prepend"
       );
@@ -181,7 +181,6 @@ function addNewCard(event) {
     link: popUpFormLinkValueCard.value,
   })
     .then((post) => {
-      console.log(post);
       renderCard(
         {
           name: post.name,
@@ -191,7 +190,7 @@ function addNewCard(event) {
           handleImageClick: handleImageClick,
           likes: post.likes,
           _id: post._id,
-          deleteActive: true,
+          profile_id: post.owner._id,
         },
         "prepend"
       );
@@ -229,3 +228,11 @@ popups.forEach((popup) => {
     }
   });
 });
+
+getProfileName()
+  .then((data) => {
+    console.log(data)
+  })
+  .catch((err) => {
+    console.log(err);
+  });
