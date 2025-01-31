@@ -26,13 +26,31 @@ function createCard({
     deleteCard(event, _id)
   });
 
-  cardLikeButton.addEventListener("click", (event) => {
-    likeCard(event, _id, {
-      likesValue,
-      likes,  
-    })
+  cardLikeButton.addEventListener("click", handleLikeCard);
+  let checked = likes.some((element) => {
+    return element._id === "f87cc046b58a155a69a0b23e";
   });
-
+  if(checked) {
+    cardLikeButton.classList.add("card__like-button_is-active");
+  }
+  //Обработка лайка
+  function handleLikeCard(event) {
+    if (checked) {
+      deleteLikeCard(event, _id, {
+        likes,
+        likesValue,
+      });
+      console.log('выполнился минус')
+      checked = false
+    } else {
+      likeCard(event, _id, {
+        likes,
+        likesValue,
+      });
+      console.log('выполнился плюс')
+      checked = true
+    }
+  }
   //Открытие модального окна у изображения, находящегося в карточке
   cardImage.addEventListener("click", () => {
     handleImageClick(name, link);
@@ -64,24 +82,31 @@ function deleteCard(event, _id) {
 
 //Функция лайка карточки
 function likeCard(event, _id, {likes, likesValue}) {
+  console.log('лайк поставил')
   putLikes(_id)
-    .then(()=>{
-      likesValue.textContent = likes.length + 1
+    .then((card)=>{
+      likesValue.textContent = card.likes.length
       event.target.classList.add("card__like-button_is-active");
     })
     .catch((error)=>{
       console.log(error)
     })
+    .finally(()=>{
+    })
 }
 
 function deleteLikeCard(event, _id, {likes, likesValue}) {
+  console.log('лайк убрал')
   deletLikes(_id)
-  .then(()=>{
-    likesValue.textContent = likes.length - 1
+  .then((card)=>{
+    likesValue.textContent = card.likes.length
     event.target.classList.remove("card__like-button_is-active");
   })
   .catch((error)=>{
     console.log(error)
   })
+  .finally(()=>{
+  })
 }
+
 export { createCard, deleteCard, likeCard };

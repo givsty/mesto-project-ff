@@ -87,6 +87,18 @@ function handleProfileFormSubmit(event) {
     });
   event.preventDefault();
 }
+//Получение Профиля
+getProfileName()
+  .then((data) => {
+    console.log(data._id);
+    profileTitle.textContent = data.name;
+    profileDescriptions.textContent = data.about;
+    profileImage.style.backgroundImage = `url('${data.avatar}')`;
+  })
+  .catch((err) => {
+    console.log(err);
+  })
+  .finally(() => {});
 
 // Получение карточек
 getInitialCards()
@@ -111,18 +123,10 @@ getInitialCards()
     console.log(error);
   });
 
-//Получение данных профиля
-getProfileName()
-  .then((data) => {
-    console.log(data._id);
-    profileTitle.textContent = data.name;
-    profileDescriptions.textContent = data.about;
-    profileImage.style.backgroundImage = `url('${data.avatar}')`;
-  })
-  .catch((err) => {
-    console.log(err);
-  })
-  .finally(() => {});
+//Загрузка данных пользователя и карточек
+Promise.all([getInitialCards, getProfileName]).then((result)=>{
+  result
+})
 
 //Выбор метода
 function renderCard(element, method) {
