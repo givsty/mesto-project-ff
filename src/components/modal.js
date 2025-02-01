@@ -1,23 +1,23 @@
 //Popup сard
 function openModal(element) {
-  element.classList.add('popup_is-animated');
+  element.classList.add("popup_is-animated");
   setTimeout(() => {
-    element.classList.add('popup_is-opened');
+    element.classList.add("popup_is-opened");
   });
   //События нажатия на клавиатуре
-  document.addEventListener('keydown', handleEscape);
+  document.addEventListener("keydown", handleEscape);
 }
 
 function closeModal(element) {
-  element.classList.remove('popup_is-opened')
-  document.removeEventListener('keydown', handleEscape); 
+  element.classList.remove("popup_is-opened");
+  document.removeEventListener("keydown", handleEscape);
 }
 
 function handleEscape(event) {
-  if (event.key === 'Escape') {
-    const openedPopup = document.querySelector('.popup_is-opened')
-    closeModal(openedPopup)
+  if (event.key === "Escape") {
+    const openedPopup = document.querySelector(".popup_is-opened");
+    closeModal(openedPopup);
   }
 }
 
-export { openModal, closeModal};
+export { openModal, closeModal };
