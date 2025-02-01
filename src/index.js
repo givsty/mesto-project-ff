@@ -9,7 +9,6 @@ import {
   patchProfileName,
   postAvatarImage,
   postInitialCard,
-  putLikes,
 } from "./components/api";
 //DOM узлы
 const addPlacesBtn = document.querySelector(".profile__add-button");
@@ -26,6 +25,8 @@ const headerLogo = document.querySelector(".header__logo");
 const formProfile = document.forms["edit-profile"];
 const formCard = document.forms["new-place"];
 const formAvatar = document.forms["avatar"];
+
+const popupBtn = document.querySelector('.popup__button')
 
 //Popup profile
 const profileTitle = document.querySelector(".profile__title");
@@ -68,20 +69,21 @@ enableValidation(validationConfig);
 
 //Функция открытия модального окна профиля
 function handleProfileFormSubmit(event) {
+  event.target.querySelector('.popup__button').textContent = 'Сохранение...'
   const profile = {
     name: nameInput.value,
     about: jobInput.value,
   };
   patchProfileName(profile)
     .then((data) => {
-      console.log(data);
       profileTitle.textContent = data.name;
       profileDescriptions.textContent = data.about;
     })
     .catch((err) => {
       console.log(err);
     })
-    .then(() => {
+    .finally(() => {
+      renderLoadind(false)
       closeModal(popUpProfile);
       clearValidation(formProfile, validationConfig);
     });
@@ -90,7 +92,7 @@ function handleProfileFormSubmit(event) {
 //Получение Профиля
 getProfileName()
   .then((data) => {
-    console.log(data._id);
+    renderLoadind(true)
     profileTitle.textContent = data.name;
     profileDescriptions.textContent = data.about;
     profileImage.style.backgroundImage = `url('${data.avatar}')`;
@@ -98,7 +100,9 @@ getProfileName()
   .catch((err) => {
     console.log(err);
   })
-  .finally(() => {});
+  .finally(() => {
+    renderLoadind(false)
+  });
 
 // Получение карточек
 getInitialCards()
@@ -121,7 +125,9 @@ getInitialCards()
   })
   .catch((error) => {
     console.log(error);
-  });
+  })
+  .finally(()=>{
+  })
 
 //Загрузка данных пользователя и карточек
 Promise.all([getInitialCards, getProfileName]).then((result)=>{
@@ -161,7 +167,7 @@ function renderPopupAvatar(event) {
 }
 
 function addProfileAvatar(event) {
-  event.preventDefault();
+  renderLoadind(true)
   postAvatarImage(popupAvatarInput.value)
     .then((data) => {
       profileImage.style.backgroundImage = `url('${data.avatar}')`;
@@ -169,7 +175,8 @@ function addProfileAvatar(event) {
     .catch((error) => {
       console.log(error);
     })
-    .then(() => {
+    .finally(() => {
+      renderLoadind(false)
       closeModal(popUpProfileImage);
     });
   event.preventDefault();
@@ -177,6 +184,7 @@ function addProfileAvatar(event) {
 
 //Создание карточки
 function addNewCard(event) {
+  renderLoadind(true)
   postInitialCard({
     likes: [],
     _id: "f87cc046b58a155a69a0b23e",
@@ -200,10 +208,30 @@ function addNewCard(event) {
     })
     .catch((error) => {
       console.log(error);
-    });
+    })
+    .finally(()=>{
+      renderLoadind(false)
+    })
   clearValidation(formCard, validationConfig);
   closeModal(popUpElementCard);
   event.preventDefault();
+}
+
+//Состояние сохранения
+function renderLoadind(isLoading) {
+  popups.forEach((popup) => {
+    if (popup.classList.contains("popup_is-opened")) {
+      const form = Array.from(popup.querySelectorAll(".popup__form"));
+      form.forEach((formElement) => {
+        const button = formElement.querySelector(".popup__button");
+        if (isLoading) {
+          button.textContent = "Сохранение...";
+        } else {
+          button.textContent = "Сохранить";
+        }
+      });
+    }
+  });
 }
 
 //Сохранение новой карточки

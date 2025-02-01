@@ -40,14 +40,12 @@ function createCard({
         likes,
         likesValue,
       });
-      console.log('выполнился минус')
       checked = false
     } else {
       likeCard(event, _id, {
         likes,
         likesValue,
       });
-      console.log('выполнился плюс')
       checked = true
     }
   }
@@ -81,8 +79,7 @@ function deleteCard(event, _id) {
 }
 
 //Функция лайка карточки
-function likeCard(event, _id, {likes, likesValue}) {
-  console.log('лайк поставил')
+function likeCard(event, _id, {likesValue}) {
   putLikes(_id)
     .then((card)=>{
       likesValue.textContent = card.likes.length
@@ -95,8 +92,7 @@ function likeCard(event, _id, {likes, likesValue}) {
     })
 }
 
-function deleteLikeCard(event, _id, {likes, likesValue}) {
-  console.log('лайк убрал')
+function deleteLikeCard(event, _id, {likesValue}) {
   deletLikes(_id)
   .then((card)=>{
     likesValue.textContent = card.likes.length
