@@ -92,6 +92,7 @@ function handleProfileFormSubmit(event) {
 //Получение Профиля
 getProfileName()
   .then((data) => {
+    console.log(data)
     renderLoadind(true)
     profileTitle.textContent = data.name;
     profileDescriptions.textContent = data.about;
