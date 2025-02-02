@@ -68,8 +68,7 @@ function createCard({
 //Функция удаления карточки
 function deleteCard(event, _id) {
   deleteInitialCard(_id)
-    .then((result) => {
-      console.log(result);
+    .then(() => {
       event.target.closest(".places__item").remove();
     })
     .catch((error) => {
