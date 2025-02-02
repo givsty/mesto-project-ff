@@ -6,15 +6,18 @@ const config = {
   },
 };
 
+function getResponseData(result) {
+  if(!result.ok) {
+    return Promise.reject(`Ошибка ${result.status}`);
+  }
+  return result.json()
+}
+
 export function getInitialCards() {
   return fetch(`${config.baseUrl}/cards`, {
     headers: config.headers,
   }).then((result) => {
-    if (result.ok) {
-      return result.json();
-    } else {
-      return Promise.reject(`Ошибка ${result.status}`);
-    }
+    getResponseData(result)
   });
 }
 
@@ -32,10 +35,7 @@ export function postInitialCard(cardElement) {
     }),
     headers: config.headers,
   }).then((result) => {
-    if (result.ok) {
-      return result.json();
-    }
-    return Promise.reject(`Ошибка ${result.status}`);
+    getResponseData(result)
   });
 }
 
@@ -47,7 +47,7 @@ export function getProfileName() {
     },
     method: "GET",
   }).then((result) => {
-    return result.json();
+    getResponseData(result)
   });
 }
 
@@ -63,10 +63,7 @@ export function patchProfileName(data) {
       about: data.about,
     }),
   }).then((result) => {
-    if (result.ok) {
-      return result.json();
-    }
-    return Promise.reject(`Ошибка ${result.status}`);
+    getResponseData(result)
   });
 }
 
@@ -77,10 +74,7 @@ export function putLikes(_id) {
       authorization: config.headers.authorization,
     },
   }).then((result) => {
-    if (result.ok) {
-      return result.json();
-    }
-    return Promise.reject(`Ошибка ${result.status}`);
+    getResponseData(result)
   });
 }
 
@@ -92,10 +86,7 @@ export function deletLikes(_id) {
       "Content-Type": "application/json",
     },
   }).then((result) => {
-    if (result.ok) {
-      return result.json();
-    }
-    Promise.reject(`Ошибка ${result.status}`);
+    getResponseData(result)
   });
 }
 
@@ -110,10 +101,7 @@ export function postAvatarImage(image) {
     }),
     method: "PATCH",
   }).then((result) => {
-    if (result.ok) {
-      return result.json();
-    }
-    return Promise.reject(`Ошибка ${result.status}`);
+    getResponseData(result)
   });
 }
 
@@ -125,9 +113,6 @@ export function deleteInitialCard(id) {
     },
     method: "DELETE",
   }).then((result) => {
-    if (result.ok) {
-      return result.json();
-    }
-    return Promise.reject(`Ошибка ${result.status}`);
+    getResponseData(result)
   });
 }

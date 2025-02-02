@@ -14,5 +14,5 @@
 - [IgorGolovkov]
 
 ## Ссылка на проект
-
+https://givsty.github.io/mesto-project-ff/
 https://github.com/givsty/mesto-project-ff.git
