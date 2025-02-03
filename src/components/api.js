@@ -31,7 +31,6 @@ export function postInitialCard(cardElement) {
     body: JSON.stringify({
       name: cardElement.name,
       link: cardElement.link,
-      _id: cardElement._id,
     }),
     headers: config.headers,
   }).then((result) => {

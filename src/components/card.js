@@ -1,7 +1,8 @@
-import { deleteInitialCard, deletLikes, putLikes } from "./api";
+import { deleteInitialCard, deletLikes, putLikes, getProfileName} from "./api";
 
 //Темплейт карточки
-const templateCards = document.querySelector("#card-template").content;
+const templateCards = document.querySelector("#card-template").content
+
 //Функция создания карточки
 function createCard({
   name,
@@ -12,6 +13,7 @@ function createCard({
   likes,
   _id,
   profile_id,
+  userId,
 }) {
   const cardElement = templateCards
     .querySelector(".places__item")
@@ -28,7 +30,7 @@ function createCard({
 
   cardLikeButton.addEventListener("click", handleLikeCard);
   let checked = likes.some((element) => {
-    return element._id === "f87cc046b58a155a69a0b23e";
+    return element._id === userId;
   });
   if (checked) {
     cardLikeButton.classList.add("card__like-button_is-active");
@@ -54,7 +56,7 @@ function createCard({
     handleImageClick(name, link);
   });
 
-  if (!(profile_id === "f87cc046b58a155a69a0b23e")) {
+  if (!(profile_id === userId)) {
     deleteCardBtn.remove();
   }
 
@@ -74,7 +76,6 @@ function deleteCard(event, _id) {
     .catch((error) => {
       console.log(error);
     });
-  event.target.closest(".places__item").remove();
 }
 
 //Функция лайка карточки
