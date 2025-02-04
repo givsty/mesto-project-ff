@@ -44,12 +44,12 @@
         <h3 class="popup__title">Редактировать профиль</h3>
         <form class="popup__form" name="edit-profile">
           <input type="text" name="name" class="popup__input popup__input_type_name" placeholder="Имя" required
-            minlength="2" maxlength="40" pattern="^[a-zA-Zа-яА-ЯёЁ0-9\s\-]+$"
+            minlength="2" maxlength="40" pattern="^[a-zA-Zа-яА-ЯёЁ\s\-]+$"
             data-error-message="Имя должно содержать только латинские и кириллические буквы, знаки дефиса и пробелы.">
           <span class="form__input-error name-input-error"></span>
           <input type="text" name="description" class="popup__input popup__input_type_description" placeholder="Занятие"
-            required minlength="2" novalidate maxlength="200" pattern="^[a-zA-Zа-яА-ЯёЁ0-9\s\-]+$"
-            data-error-message="Описание должно содержать только латинские и кириллические буквы, знаки дефиса и пробелы.">
+            required minlength="2" novalidate maxlength="200" pattern="^[a-zA-Zа-яА-ЯёЁ\s\-]+$"
+            data-error-message="Название должно содержать только латинские и кириллические буквы, знаки дефиса и пробелы.">
           <span class="form__input-error description-input-error"></span>
           <button type="submit" class="button popup__button">Сохранить</button>
         </form>
@@ -61,7 +61,8 @@
         <h3 class="popup__title">Новое место</h3>
         <form class="popup__form" name="new-place">
           <input type="text" name="place-name" class="popup__input popup__input_type_card-name" placeholder="Название"
-            required minlength="2">
+            required minlength="2" maxlength="40" pattern="^[a-zA-Zа-яА-ЯёЁ\s\-]+$"
+            data-error-message="Название должно содержать только латинские и кириллические буквы, знаки дефиса и пробелы.">
           <span class="form__input-error place-name-input-error"></span>
           <input type="url" name="link" class="popup__input popup__input_type_url" placeholder="Ссылка на картинку"
             required novalidate type="url">

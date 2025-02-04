@@ -65,9 +65,6 @@ const validationConfig = {
   errorClass: "popup__error_visible",
 };
 
-//Начало работы валидации
-enableValidation(validationConfig);
-
 //Функция открытия модального окна профиля
 function handleProfileFormSubmit(event) {
   const profile = {
@@ -80,12 +77,13 @@ function handleProfileFormSubmit(event) {
       profileTitle.textContent = data.name;
       profileDescriptions.textContent = data.about;
       closeModal(popUpProfile);
-      clearValidation(formProfile, validationConfig);
+      clearValidation(formProfile, validationConfig)
     })
     .catch((err) => {
       console.log(err);
     })
     .finally(() => {
+      clearValidation(formProfile, validationConfig);
       renderLoadind(false, event.target)
     });
   event.preventDefault();
@@ -135,8 +133,8 @@ function renderPopupProfile() {
     .then((data) => {
       const name = data.name;
       const job = data.about;
-      nameInput.setAttribute("value", name);
-      jobInput.setAttribute("value", job);
+      nameInput.value = name
+      jobInput.value = job
     })
     .catch((err) => {
       console.log(err);
@@ -154,13 +152,14 @@ function addProfileAvatar(event) {
   postAvatarImage(popupAvatarInput.value)
     .then((data) => {
       profileImage.style.backgroundImage = `url('${data.avatar}')`;
+      closeModal(popUpProfileImage);
+      clearValidation(formAvatar, validationConfig)
     })
     .catch((error) => {
       console.log(error);
     })
     .finally(() => {
       renderLoadind(false, event.target)
-      closeModal(popUpProfileImage);
     });
   event.preventDefault();
 }
@@ -168,11 +167,13 @@ function addProfileAvatar(event) {
 //Создание карточки
 function addNewCard(event) {
   renderLoadind(true, event.target)
+  clearValidation(formCard, validationConfig)
   postInitialCard({
     name: popUpFormNameValueCard.value,
     link: popUpFormLinkValueCard.value,
   })
     .then((post) => {
+      closeModal(popUpElementCard);
       renderCard(
         {
           name: post.name,
@@ -194,8 +195,6 @@ function addNewCard(event) {
     .finally(()=>{
       renderLoadind(false, event.target)
     })
-  clearValidation(formCard, validationConfig);
-  closeModal(popUpElementCard);
   event.preventDefault();
 }
 
@@ -234,3 +233,6 @@ popups.forEach((popup) => {
     }
   });
 });
+
+//Начало работы валидации
+enableValidation(validationConfig);
