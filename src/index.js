@@ -27,8 +27,6 @@ const formProfile = document.forms["edit-profile"];
 const formCard = document.forms["new-place"];
 const formAvatar = document.forms["avatar"];
 
-const popupBtn = document.querySelector('.popup__button')
-
 //Popup profile
 const profileTitle = document.querySelector(".profile__title");
 const profileDescriptions = document.querySelector(".profile__description");
@@ -75,15 +73,13 @@ function handleProfileFormSubmit(event) {
   patchProfileName(profile)
     .then((data) => {
       profileTitle.textContent = data.name;
-      profileDescriptions.textContent = data.about;
+      profileDescriptions.textContent = data.about
       closeModal(popUpProfile);
-      clearValidation(formProfile, validationConfig)
     })
     .catch((err) => {
       console.log(err);
     })
     .finally(() => {
-      clearValidation(formProfile, validationConfig);
       renderLoadind(false, event.target)
     });
   event.preventDefault();
@@ -129,6 +125,7 @@ function handleImageClick(name, link) {
 }
 
 function renderPopupProfile() {
+  clearValidation(formProfile, validationConfig)
   getProfileName()
     .then((data) => {
       const name = data.name;
@@ -143,6 +140,7 @@ function renderPopupProfile() {
 }
 
 function renderPopupAvatar(event) {
+  clearValidation(formAvatar, validationConfig)
   event.preventDefault();
   openModal(popUpProfileImage);
 }
@@ -153,7 +151,6 @@ function addProfileAvatar(event) {
     .then((data) => {
       profileImage.style.backgroundImage = `url('${data.avatar}')`;
       closeModal(popUpProfileImage);
-      clearValidation(formAvatar, validationConfig)
     })
     .catch((error) => {
       console.log(error);
@@ -167,7 +164,6 @@ function addProfileAvatar(event) {
 //Создание карточки
 function addNewCard(event) {
   renderLoadind(true, event.target)
-  clearValidation(formCard, validationConfig)
   postInitialCard({
     name: popUpFormNameValueCard.value,
     link: popUpFormLinkValueCard.value,
@@ -188,6 +184,7 @@ function addNewCard(event) {
         },
         "prepend"
       );
+      formCard.reset()
     })
     .catch((error) => {
       console.log(error);
@@ -213,6 +210,7 @@ formCard.addEventListener("submit", addNewCard);
 
 //События открытия окна с созданием карточками
 addPlacesBtn.addEventListener("click", (event) => {
+  clearValidation(formCard, validationConfig)
   openModal(popUpElementCard);
 });
 

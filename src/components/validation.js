@@ -115,13 +115,25 @@ function hideInputError(
 
 function clearValidation(
   formSelector,
-  { inputSelector, inputErrorClass, errorClass }
+  {
+    inputSelector,
+    submitButtonSelector,
+    inactiveButtonClass,
+    inputErrorClass,
+    errorClass,
+  }
 ) {
   const inputList = Array.from(formSelector.querySelectorAll(inputSelector));
+  const button = formSelector.querySelector(submitButtonSelector);
+  button.disabled = true;
+  button.classList.add(inactiveButtonClass);
   inputList.forEach((inputElement) => {
-    inputElement.addEventListener("input", () => {
-      hideInputError(formSelector, inputErrorClass, errorClass, inputElement);
-    });
+    hideInputError(
+      formSelector,
+      inputErrorClass,
+      errorClass,
+      inputElement,
+    );
   });
 }
 
