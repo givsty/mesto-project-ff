@@ -1,4 +1,4 @@
-import { deleteInitialCard, deletLikes, putLikes, getProfileName} from "./api";
+import { deleteInitialCard, deletLikes, putLikes} from "./api";
 
 //Темплейт карточки
 const templateCards = document.querySelector("#card-template").content

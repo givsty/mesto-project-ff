@@ -87,11 +87,11 @@ function handleProfileFormSubmit(event) {
 
 //Загрузка данных пользователя и карточек
 Promise.all([getInitialCards(), getProfileName()]).then(([cards, user])=>{
-  userId = user._id
-  profileTitle.textContent = user.name;
-  profileDescriptions.textContent = user.about;
-  profileImage.style.backgroundImage = `url('${user.avatar}')`;
   Array.from(cards).forEach((element) => {
+    userId = user._id
+    profileTitle.textContent = user.name;
+    profileDescriptions.textContent = user.about;
+    profileImage.style.backgroundImage = `url('${user.avatar}')`;
     renderCard(
       {
         name: element.name,
@@ -151,6 +151,7 @@ function addProfileAvatar(event) {
     .then((data) => {
       profileImage.style.backgroundImage = `url('${data.avatar}')`;
       closeModal(popUpProfileImage);
+      clearValidation(formAvatar, validationConfig)
     })
     .catch((error) => {
       console.log(error);
