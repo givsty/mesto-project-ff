@@ -69,47 +69,45 @@ function handleProfileFormSubmit(event) {
     name: nameInput.value,
     about: jobInput.value,
   };
-  renderLoadind(true, event.target)
+  renderLoadind(true, event.target);
   patchProfileName(profile)
     .then((data) => {
       profileTitle.textContent = data.name;
-      profileDescriptions.textContent = data.about
+      profileDescriptions.textContent = data.about;
       closeModal(popUpProfile);
     })
     .catch((err) => {
       console.log(err);
     })
     .finally(() => {
-      renderLoadind(false, event.target)
+      renderLoadind(false, event.target);
     });
   event.preventDefault();
 }
 
 //Загрузка данных пользователя и карточек
-Promise.all([getInitialCards(), getProfileName()]).then(([cards, user])=>{
-  Array.from(cards).forEach((element) => {
-    userId = user._id
-    profileTitle.textContent = user.name;
-    profileDescriptions.textContent = user.about;
-    profileImage.style.backgroundImage = `url('${user.avatar}')`;
-    renderCard(
-      {
-        name: element.name,
-        link: element.link,
-        likeCard: likeCard,
-        deleteCard: deleteCard,
-        handleImageClick: handleImageClick,
-        likes: element.likes,
-        _id: element._id,
-        profile_id: element.owner._id,
-        userId: userId,
-      },
-      "prepend"
-    );
+Promise.all([getInitialCards(), getProfileName()])
+  .then(([cards, user]) => {
+    Array.from(cards).forEach((card) => {
+      userId = user._id;
+      profileTitle.textContent = user.name;
+      profileDescriptions.textContent = user.about;
+      profileImage.style.backgroundImage = `url('${user.avatar}')`;
+      renderCard(
+        {
+          card,
+          likeCard,
+          deleteCard,
+          handleImageClick,
+          userId,
+        },
+        "prepend"
+      );
+    });
+  })
+  .catch((error) => {
+    console.log(error);
   });
-}).catch((error)=>{
-  console.log(error)
-})
 
 //Выбор метода
 function renderCard(element, method) {
@@ -125,13 +123,13 @@ function handleImageClick(name, link) {
 }
 
 function renderPopupProfile() {
-  clearValidation(formProfile, validationConfig)
+  clearValidation(formProfile, validationConfig);
   getProfileName()
     .then((data) => {
       const name = data.name;
       const job = data.about;
-      nameInput.value = name
-      jobInput.value = job
+      nameInput.value = name;
+      jobInput.value = job;
     })
     .catch((err) => {
       console.log(err);
@@ -140,65 +138,61 @@ function renderPopupProfile() {
 }
 
 function renderPopupAvatar(event) {
-  clearValidation(formAvatar, validationConfig)
+  clearValidation(formAvatar, validationConfig);
   event.preventDefault();
   openModal(popUpProfileImage);
 }
 
 function addProfileAvatar(event) {
-  renderLoadind(true, event.target)
+  renderLoadind(true, event.target);
   postAvatarImage(popupAvatarInput.value)
     .then((data) => {
       profileImage.style.backgroundImage = `url('${data.avatar}')`;
       closeModal(popUpProfileImage);
-      clearValidation(formAvatar, validationConfig)
+      clearValidation(formAvatar, validationConfig);
     })
     .catch((error) => {
       console.log(error);
     })
     .finally(() => {
-      renderLoadind(false, event.target)
+      renderLoadind(false, event.target);
     });
   event.preventDefault();
 }
 
 //Создание карточки
 function addNewCard(event) {
-  renderLoadind(true, event.target)
+  renderLoadind(true, event.target);
   postInitialCard({
     name: popUpFormNameValueCard.value,
     link: popUpFormLinkValueCard.value,
   })
-    .then((post) => {
+    .then((card) => {
       closeModal(popUpElementCard);
       renderCard(
         {
-          name: post.name,
-          link: post.link,
-          deleteCard: deleteCard,
-          likeCard: likeCard,
-          handleImageClick: handleImageClick,
-          likes: post.likes,
-          _id: post._id,
-          profile_id: post.owner._id,
-          userId: userId,
+          card,
+          likeCard,
+          deleteCard,
+          handleImageClick,
+          userId,
         },
         "prepend"
       );
-      formCard.reset()
+      formCard.reset();
     })
     .catch((error) => {
       console.log(error);
     })
-    .finally(()=>{
-      renderLoadind(false, event.target)
-    })
+    .finally(() => {
+      renderLoadind(false, event.target);
+    });
   event.preventDefault();
 }
 
 //Состояние сохраненияç
 function renderLoadind(isLoading, buttonElement) {
-  const button = buttonElement.querySelector('.popup__button')
+  const button = buttonElement.querySelector(".popup__button");
   if (isLoading) {
     button.textContent = "Сохранение...";
   } else {
@@ -211,7 +205,7 @@ formCard.addEventListener("submit", addNewCard);
 
 //События открытия окна с созданием карточками
 addPlacesBtn.addEventListener("click", (event) => {
-  clearValidation(formCard, validationConfig)
+  clearValidation(formCard, validationConfig);
   openModal(popUpElementCard);
 });
 
