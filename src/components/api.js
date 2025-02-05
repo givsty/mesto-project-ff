@@ -7,8 +7,8 @@ const config = {
 };
 
 function getResponseData(result) {
-  if(result.ok) {
-    return result.json()
+  if (result.ok) {
+    return result.json();
   }
   return Promise.reject(`Ошибка ${result.status}`);
 }
@@ -17,7 +17,7 @@ export function getInitialCards() {
   return fetch(`${config.baseUrl}/cards`, {
     headers: config.headers,
   }).then((result) => {
-    return getResponseData(result)
+    return getResponseData(result);
   });
 }
 
@@ -34,7 +34,7 @@ export function postInitialCard(cardElement) {
     }),
     headers: config.headers,
   }).then((result) => {
-    return getResponseData(result)
+    return getResponseData(result);
   });
 }
 
@@ -46,7 +46,7 @@ export function getProfileName() {
     },
     method: "GET",
   }).then((result) => {
-    return getResponseData(result)
+    return getResponseData(result);
   });
 }
 
@@ -62,7 +62,7 @@ export function patchProfileName(data) {
       about: data.about,
     }),
   }).then((result) => {
-    return getResponseData(result)
+    return getResponseData(result);
   });
 }
 
@@ -73,7 +73,7 @@ export function putLikes(_id) {
       authorization: config.headers.authorization,
     },
   }).then((result) => {
-    return getResponseData(result)
+    return getResponseData(result);
   });
 }
 
@@ -85,7 +85,7 @@ export function deletLikes(_id) {
       "Content-Type": "application/json",
     },
   }).then((result) => {
-    return getResponseData(result)
+    return getResponseData(result);
   });
 }
 
@@ -100,7 +100,7 @@ export function postAvatarImage(image) {
     }),
     method: "PATCH",
   }).then((result) => {
-    return getResponseData(result)
+    return getResponseData(result);
   });
 }
 
@@ -112,6 +112,6 @@ export function deleteInitialCard(id) {
     },
     method: "DELETE",
   }).then((result) => {
-    return getResponseData(result)
+    return getResponseData(result);
   });
 }

@@ -128,12 +128,7 @@ function clearValidation(
   button.disabled = true;
   button.classList.add(inactiveButtonClass);
   inputList.forEach((inputElement) => {
-    hideInputError(
-      formSelector,
-      inputErrorClass,
-      errorClass,
-      inputElement,
-    );
+    hideInputError(formSelector, inputErrorClass, errorClass, inputElement);
   });
 }
 

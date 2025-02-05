@@ -1,16 +1,10 @@
-import { deleteInitialCard, deletLikes, putLikes} from "./api";
+import { deleteInitialCard, deletLikes, putLikes } from "./api";
 
 //Темплейт карточки
-const templateCards = document.querySelector("#card-template").content
+const templateCards = document.querySelector("#card-template").content;
 
 //Функция создания карточки
-function createCard({
-  card,
-  deleteCard,
-  likeCard,
-  handleImageClick,
-  userId
-}) {
+function createCard({ card, deleteCard, likeCard, handleImageClick, userId }) {
   const { name, link, likes, _id, owner } = card;
   const cardElement = templateCards
     .querySelector(".places__item")
@@ -20,7 +14,7 @@ function createCard({
   const deleteCardBtn = cardElement.querySelector(".card__delete-button");
   const cardLikeButton = cardElement.querySelector(".card__like-button");
   const likesValue = cardElement.querySelector(".card__like-counter");
-  console.log(owner._id)
+  console.log(owner._id);
   deleteCardBtn.addEventListener("click", (event) => {
     deleteCard(event, _id);
   });
