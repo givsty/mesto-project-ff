@@ -88,7 +88,7 @@ function handleProfileFormSubmit(event) {
 //Загрузка данных пользователя и карточек
 Promise.all([getInitialCards(), getProfileName()])
   .then(([cards, user]) => {
-    Array.from(cards).forEach((card) => {
+    cards.forEach((card) => {
       userId = user._id;
       profileTitle.textContent = user.name;
       profileDescriptions.textContent = user.about;
@@ -124,16 +124,8 @@ function handleImageClick(name, link) {
 
 function renderPopupProfile() {
   clearValidation(formProfile, validationConfig);
-  getProfileName()
-    .then((data) => {
-      const name = data.name;
-      const job = data.about;
-      nameInput.value = name;
-      jobInput.value = job;
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+  nameInput.value = profileTitle.textContent
+  jobInput.value = profileDescriptions.textContent
   openModal(popUpProfile);
 }
 
