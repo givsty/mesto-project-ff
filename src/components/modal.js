@@ -1,9 +1,6 @@
 //Popup сard
 function openModal(element) {
-  element.classList.add("popup_is-animated");
-  setTimeout(() => {
-    element.classList.add("popup_is-opened");
-  });
+  element.classList.add("popup_is-opened");
   //События нажатия на клавиатуре
   document.addEventListener("keydown", handleEscape);
 }
